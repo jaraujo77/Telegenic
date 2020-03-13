@@ -164,6 +164,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Plumbing\CastleWindsor\Installers\ControllerInstaller.cs" />
+    <Compile Include="Plumbing\CastleWindsor\Installers\PersistenceInstaller.cs" />
+    <Compile Include="Plumbing\CastleWindsor\Installers\RepositoriesInstaller.cs" />
+    <Compile Include="Plumbing\CastleWindsor\WindsorControllerFactory.cs" />
+    <Compile Include="Plumbing\nHibernate\Maps\BaseMaps.cs" />
+    <Compile Include="Plumbing\nHibernate\PersistenceFacility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -408,6 +414,12 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Telegenic.Entities\Telegenic.Entities.csproj">
+      <Project>{035A311F-5F4D-4123-BA68-9F4FEEAFE384}</Project>
+      <Name>Telegenic.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
