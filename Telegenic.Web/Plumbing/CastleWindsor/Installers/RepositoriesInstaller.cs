@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Telegenic.Repository;
 
 namespace Telegenic.Web.Plumbing.CastleWindsor.Installers
 {
@@ -12,7 +13,9 @@ namespace Telegenic.Web.Plumbing.CastleWindsor.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            throw new NotImplementedException();
+            container.Register(Classes.FromAssemblyInThisApplication()
+                .Where(Component.IsInSameNamespaceAs<SeriesRepository>())
+                .LifestyleTransient());
         }
     }
 }
