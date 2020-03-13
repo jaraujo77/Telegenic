@@ -1,0 +1,16 @@
+
+################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+**/bin
+**/obj
+*.user
+/.vs
+/packages
+*.Cache
+/Telegenic.Web/node_modules
+/Telegenic.Web/buildConfig.json
+/Telegenic.Web/Include/css/telegenic.site.min.css
+/Telegenic.Web/Include/js/telegenic.main.min.js
+/Documentation/Telegenic_db_schema.vsd
