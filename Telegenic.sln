@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telegenic.Web", "Telegenic.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telegenic.Entities", "Telegenic.Entities\Telegenic.Entities.csproj", "{035A311F-5F4D-4123-BA68-9F4FEEAFE384}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telegenic.Repository", "Telegenic.Repository\Telegenic.Repository.csproj", "{4166AFEE-18C8-4829-9255-BF7C4F5254C2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{035A311F-5F4D-4123-BA68-9F4FEEAFE384}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{035A311F-5F4D-4123-BA68-9F4FEEAFE384}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{035A311F-5F4D-4123-BA68-9F4FEEAFE384}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4166AFEE-18C8-4829-9255-BF7C4F5254C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4166AFEE-18C8-4829-9255-BF7C4F5254C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4166AFEE-18C8-4829-9255-BF7C4F5254C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4166AFEE-18C8-4829-9255-BF7C4F5254C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
