@@ -62,7 +62,7 @@ function compileJS() {
 
 function migrateAssemblies() {
     return gulp
-        .src(['bin/VideoStreaming.*.dll', 'bin/VideoStreaming.*.pdb'])
+        .src(['bin/Telegenic.*.dll', 'bin/Telegenic.*.pdb'])
         .pipe(rename({ dirname: 'bin/' }))
         .pipe(toLocalInstance());
 }
