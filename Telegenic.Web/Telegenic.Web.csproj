@@ -420,6 +420,10 @@
       <Project>{035A311F-5F4D-4123-BA68-9F4FEEAFE384}</Project>
       <Name>Telegenic.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Telegenic.Repository\Telegenic.Repository.csproj">
+      <Project>{4166afee-18c8-4829-9255-bf7c4f5254c2}</Project>
+      <Name>Telegenic.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
