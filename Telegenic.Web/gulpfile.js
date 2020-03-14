@@ -1,4 +1,4 @@
-﻿/// <binding BeforeBuild='default' AfterBuild='afterBuild' ProjectOpened='watch' />
+﻿/// <binding AfterBuild='default' ProjectOpened='watch' />
 const gulp = require('gulp');
 const del = require('del');//Deletes files and directories using globs. https://www.npmjs.com/package/del
 const concat = require('gulp-concat');//Concatenates .sass and .js files. https://www.npmjs.com/package/gulp-concat
@@ -8,6 +8,11 @@ sass.compiler = require("node-sass");//https://www.npmjs.com/package/node-sass
 const minimist = require('minimist')//Reads command line args in build. https://www.npmjs.com/package/minimist
 const terser = require('gulp-terser')//Minifies es6 js https://www.npmjs.com/package/gulp-terser
 const rename = require('gulp-rename')//rename files or directories in streams
+const webpack = require('webpack-stream')//packages js and resolves dependencies
+const named = require('vinyl-named')//used by webpack-stream to rename files
+const rev = require('gulp-rev')//add revision hashes to release files
+const gulpif = require('gulp-if')//conditionally control the flow of vinyl objects
+
 
 const config = require('./config');
 
@@ -20,8 +25,8 @@ function clean(cb) {
 
 
 function watch() {
-    gulp.watch(config.watch.css, compileSass);
-    gulp.watch(config.src.js.concat(config.watch.viewsjs), compileJS);
+    gulp.watch(config.watch.css, { delay: 500}, compileSass);
+    gulp.watch(config.src.js.concat(config.watch.viewsjs), { delay: 500 }, compileJS);
     gulp.watch(config.watch.views).on('change', function (path) { copyFile(path) });
 }
 
@@ -52,9 +57,12 @@ function compileJS() {
 
     log(getJsCompilePaths());
 
-    return gulp.src(getJsCompilePaths())
-        .pipe(terser())
-        .pipe(concat(config.minFiles.jsFileName))
+    return gulp.src(getJsMainPath())
+        .pipe(named(function (file) { return config.minFiles.jsFileName }))
+        .pipe(webpack({
+            devtool: isRelease() ? 'source-map' : 'inline-source-map'
+        }))
+        //.pipe(gulpif(isRelease(), rev())) TODO: use gulp-inject to update _Layout.cshtml with revisioned file name
         .pipe(rename({ dirname: config.paths.js }))
         .pipe(gulp.dest('./'))
         .pipe(toLocalInstance()).on('end', function () { log('End compiling JavaScript files'.green) });
@@ -75,6 +83,10 @@ function migrateAssemblies() {
 
 function getJsCompilePaths() {
     return config.src.js.concat(config.watch.viewsjs);
+}
+
+function getJsMainPath() {
+    return config.paths.js + '/main.js';
 }
 
 function getScssCompilePaths() {
@@ -104,7 +116,7 @@ function getFileName(file) {
 }
 
 //gets project build configuration
-function isRelease() {
+function isRelease() {    
     return config.buildConfig.config !== 'Debug' && config.buildConfig.config !== 'Development';
 }
 
@@ -144,11 +156,10 @@ function log(message, prevTime) {
     return now;
 }
 
-var build = gulp.series(clean, gulp.parallel(compileSass, compileJS));
-var afterBuild = migrateAssemblies;
+var build = gulp.series(clean, gulp.parallel(compileSass, compileJS), migrateAssemblies);
 
 function test(cb) {
-    console.log("Merged arrays: " + config.src.js.concat(config.watch.viewsjs));
+    compileJS();
 
     cb();
 }
@@ -156,6 +167,5 @@ function test(cb) {
 
 exports.test = test;
 exports.build = build;
-exports.afterBuild = afterBuild;
 exports.watch = watch;
 exports.default = build;

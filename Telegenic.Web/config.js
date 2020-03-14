@@ -9,7 +9,7 @@ var jsPath = assetsPath + '/js';
 var bootstrapPath = '/Content/bootstrap';
 
 
-var minJsFileName = 'telegenic.main.min.js';
+var minJsFileName = 'telegenic.main.bundle';
 var minCssFileName = 'telegenic.site.min.css';
 
 var buildConfigjson = require('./buildConfig.json');
@@ -21,7 +21,8 @@ var config = {
         ],
         js: [            
             jsPath + '/**/*.js',            
-            '!' + jsPath + '/**/*.min.js'
+            '!' + jsPath + '/**/*.min.js',
+            '!' + jsPath + '/**/*.bundle.js'
         ]
     },
     paths: {
@@ -43,7 +44,8 @@ var config = {
         ],
         js: [
             jsPath + '/**/*.js',
-            '!' + jsPath + '/**/*.min.js'
+            '!' + jsPath + '/**/*.min.js',
+            '!' + jsPath + '/**/*.bundle.js'
         ],
         views: [
             viewsPath + '/**/*.cshtml',
