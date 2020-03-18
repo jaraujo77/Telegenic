@@ -1,0 +1,28 @@
+﻿@using Telegenic.Entities.ViewModels;
+@using Telegenic.Entities.Models;
+@model vmEntity
+
+<h2>@Model.PageHeading</h2>
+
+<hr class="my-4">
+
+<div class="col-lg-4 col-sm-6">
+    <h7>
+        @Html.LabelFor(model => model.Season.Title, new { @class = "" })
+    </h7>
+    <p class="lead">
+        <strong>@Html.DisplayFor(model => model.Season.Title, new { @class = "" })</strong>
+    </p>
+</div>
+<div class="col-lg-4 col-sm-6">
+    <h7>
+        @Html.LabelFor(model => model.Season.Season_Number, new { @class = "" })
+    </h7>
+    <p class="lead">
+        <strong>@Html.DisplayFor(model => model.Season.Season_Number, new { @class = "" })</strong>
+    </p>
+</div>
+
+<div class="col-lg-4 col-sm-6 align-content-lg-end">
+    @Html.ActionLink("Back", "Index", "Season", new { area = "Admin" }, new { @class = "btn btn-primary" })
+</div>

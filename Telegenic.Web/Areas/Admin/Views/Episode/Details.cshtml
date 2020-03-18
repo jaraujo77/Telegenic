@@ -1,0 +1,55 @@
+﻿@using Telegenic.Entities.ViewModels;
+@using Telegenic.Entities.Models;
+
+@model vmEntity
+
+
+<h2>@Model.PageHeading</h2>
+
+<hr class="my-4">
+
+<div class="col-lg-4 col-sm-6">
+    <h7>
+        @Html.LabelFor(model => model.Episode.Title, new { @class = "" })
+    </h7>
+    <p class="lead">
+        <strong>@Html.DisplayFor(model => model.Episode.Title, new { @class = "" })</strong>
+    </p>
+</div>
+<div class="col-lg-4 col-sm-6">
+    <h7`>
+        @Html.LabelFor(model => model.Episode.EpisodeNumber, new { @class = "" })
+    </h7`>
+    <p class="lead">
+        <strong>@Html.DisplayFor(model => model.Episode.EpisodeNumber, new { @class = "" })</strong>
+    </p>
+</div>
+<div class="col-lg-4 col-sm-6">
+    <h7`>
+        @Html.LabelFor(model => model.Episode.Runtime, new { @class = "" })
+    </h7`>
+    <p class="lead">
+        <strong>@Html.DisplayFor(model => model.Episode.Runtime.TotalMinutes, new { @class = "" })</strong>
+    </p>
+</div>
+<div class="col-lg-4 col-sm-6">
+    <h7`>
+        @Html.LabelFor(model => model.Episode.PlaceholderImagePath, new { @class = "" })
+    </h7`>
+    <p class="lead">
+        <strong>@Html.DisplayFor(model => model.Episode.PlaceholderImagePath, new { @class = "" })</strong>
+    </p>
+</div>
+<div class="col-lg-4 col-sm-6">
+    <h7`>
+        @Html.LabelFor(model => model.Episode.Rating, new { @class = "" })
+    </h7`>
+    <p class="lead">
+        <strong>@Html.DisplayFor(model => model.Episode.Rating, new { @class = "" })</strong>
+    </p>
+</div>
+
+
+<div class="col-lg-4 col-sm-6 align-content-lg-end">
+    @Html.ActionLink("Back", "Index", "Episode", new { area = "Admin" }, new { @class = "btn btn-primary" })
+</div>

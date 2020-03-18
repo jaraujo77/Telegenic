@@ -160,10 +160,17 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\EpisodeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\GenreController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MovieController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SeasonController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SeriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\vmShow.cs" />
     <Compile Include="Plumbing\CastleWindsor\Installers\ControllerInstaller.cs" />
     <Compile Include="Plumbing\CastleWindsor\Installers\PersistenceInstaller.cs" />
     <Compile Include="Plumbing\CastleWindsor\Installers\RepositoriesInstaller.cs" />
@@ -281,6 +288,23 @@
     <Content Include="Include\css\_site.scss" />
     <Content Include="Include\css\Cosmo\_bootswatch.scss" />
     <Content Include="Include\css\Cosmo\_variables.scss" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Episode\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Episode\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Episode\Save.cshtml" />
+    <Content Include="Areas\Admin\Views\Genre\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Genre\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Genre\Save.cshtml" />
+    <Content Include="Areas\Admin\Views\Movie\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Movie\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Movie\Save.cshtml" />
+    <Content Include="Areas\Admin\Views\Season\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Season\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Season\Save.cshtml" />
+    <Content Include="Areas\Admin\Views\Series\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Series\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Series\Save.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <None Include="Properties\PublishProfiles\Debug.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <Content Include="Scripts\esm\popper-utils.js" />
@@ -398,11 +422,14 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Shared\Partials\Navigation.cshtml" />
+    <Content Include="Views\Shared\Partials\_ListItem_Card_Image.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Include\images\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

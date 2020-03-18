@@ -15,6 +15,7 @@ namespace Telegenic.Web.Plumbing.CastleWindsor.Installers
         {
             container.Register(Classes.FromAssemblyInThisApplication()
                 .Where(Component.IsInSameNamespaceAs<SeriesRepository>())
+                .WithService.DefaultInterfaces()
                 .LifestyleTransient());
         }
     }
