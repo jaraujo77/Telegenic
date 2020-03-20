@@ -3,7 +3,7 @@
     <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
         <div class="container">
             <div class="navbar-brand">
-                @Html.ActionLink("Video Streaming", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Telegenic", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -23,6 +23,8 @@
                             @Html.ActionLink("Movie", "Index", "Movie", new { area = "Admin" }, new { @class = "dropdown-item" })
                             <div class="dropdown-divider"></div>
                             @Html.ActionLink("Genre", "Index", "Genre", new { area = "Admin" }, new { @class = "dropdown-item" })
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink("SingleSeries", "Index", "SingleSeries", new { area = "Admin" }, new { @class = "dropdown-item" })
                         </div>
                     </li>
                 </ul>
