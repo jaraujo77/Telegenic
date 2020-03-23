@@ -53,7 +53,7 @@ namespace Telegenic.Web.Areas.Admin.Controllers
         // GET: Admin/Series/Create
         public ActionResult Save(int? id)
         {
-            var vm = new vmEntity(_genreRepository.GetAll());
+            var vm = new vmEntity(_genreRepository.GetAll().OrderBy(x => x.Title));
             vm.Series = id != 0 ? _seriesRepository.GetById(id.GetValueOrDefault()) : new Series();
             vm.PageHeading = id != null ? string.Format("Edit Series: {0}", vm.Series.Title) : string.Format("Add New Series");
 
@@ -84,7 +84,7 @@ namespace Telegenic.Web.Areas.Admin.Controllers
 
         public ActionResult Detail(int id)
         {
-            var vm = new vmEntity(_genreRepository.GetAll());
+            var vm = new vmEntity(_genreRepository.GetAll().OrderBy(x => x.Title));
             vm.Series = id > 0 ? _seriesRepository.GetById(id) : new Series();
             vm.PageHeading = string.Format("Series: {0}", vm.Series.Title);
 
