@@ -191,6 +191,8 @@
     <Content Include="Global.asax" />
     <Content Include="gulpfile.js" />
     <Content Include="Include\css\telegenic.site.min.css" />
+    <Content Include="Include\js\Admin\formBase.js" />
+    <Content Include="Include\js\Admin\genreForms.js" />
     <Content Include="Include\js\Admin\seriesForms.js" />
     <Content Include="Include\js\appStart.js" />
     <Content Include="Include\js\main.js" />
