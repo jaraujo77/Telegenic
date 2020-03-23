@@ -26,7 +26,7 @@
                     }
                 }
 
-                xhr.open('get', `/admin/singleseries/save/${id}`, true);
+                xhr.open('get', `/admin/series/save/${id}`, true);
                 xhr.send();
 
             });
@@ -57,7 +57,7 @@
                     }
                 }
 
-                xhr.open('post', `/admin/singleseries/delete/${id}`, true);
+                xhr.open('post', `/admin/series/delete/${id}`, true);
                 xhr.send();
             });
         });

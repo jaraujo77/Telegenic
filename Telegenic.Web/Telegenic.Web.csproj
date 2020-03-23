@@ -309,9 +309,6 @@
     <Content Include="Areas\Admin\Views\Season\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Season\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Season\Save.cshtml" />
-    <Content Include="Areas\Admin\Views\Series\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Series\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Series\Save.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\SingleSeries\Index.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
@@ -328,6 +325,11 @@
     <Content Include="Areas\Admin\Views\SingleSeries\_gridResultsPanel.cshtml" />
     <Content Include="Areas\Admin\Views\SingleSeries\_savePanel.cshtml" />
     <Content Include="Areas\Admin\Views\SingleSeries\_detailPanel.cshtml" />
+    <Content Include="Areas\Admin\Views\Series\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Series\_detailPanel.cshtml" />
+    <Content Include="Areas\Admin\Views\Series\_gridResultsPanel.cshtml" />
+    <Content Include="Areas\Admin\Views\Series\_savePanel.cshtml" />
+    <Content Include="Areas\Admin\Views\Series\_searchPanel.cshtml" />
     <None Include="Properties\PublishProfiles\Debug.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <Content Include="Scripts\esm\popper-utils.js" />
