@@ -21,9 +21,12 @@ namespace Telegenic.Entities.Models
         public virtual Genre Genre { get; set; }
 
         [Display(Name = "Season Count")]
-        public virtual int SeasonCount()
+        public virtual int SeasonCount
         {
-            return Seasons.Count();
+            get
+            {
+                return Seasons != null ? Seasons.Count() : 0;
+            }
         }
     }
 }

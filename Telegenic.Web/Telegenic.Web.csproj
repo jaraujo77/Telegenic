@@ -327,6 +327,7 @@
     <Content Include="Areas\Admin\Views\SingleSeries\_searchPanel.cshtml" />
     <Content Include="Areas\Admin\Views\SingleSeries\_gridResultsPanel.cshtml" />
     <Content Include="Areas\Admin\Views\SingleSeries\_savePanel.cshtml" />
+    <Content Include="Areas\Admin\Views\SingleSeries\_detailPanel.cshtml" />
     <None Include="Properties\PublishProfiles\Debug.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <Content Include="Scripts\esm\popper-utils.js" />

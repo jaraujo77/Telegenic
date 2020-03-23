@@ -16,8 +16,11 @@
                 let xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function loadSaveForm() {
                     if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById('SaveFormArea').innerHTML = this.responseText;
                         let loadForm = new seriesForms();
+                        loadForm.resetAllPanels();
+
+                        document.getElementById('SaveFormArea').innerHTML = this.responseText;
+                        
                         loadForm.bindResetButton();
                         loadForm.bindSaveButton();
                     }
@@ -44,8 +47,12 @@
                 let xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function loadSaveForm() {
                     if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById('SaveFormArea').innerHTML = this.responseText;
+
                         let loadForm = new seriesForms();
+                        loadForm.resetAllPanels();
+
+                        document.getElementById('SaveFormArea').innerHTML = this.responseText;
+                        
                         loadForm.bindDeleteButton();
                     }
                 }
@@ -68,8 +75,12 @@
             let xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function loadSaveForm() {
                 if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById('GridResultArea').innerHTML = this.responseText;
+
                     let loadForm = new seriesForms();
+                    loadForm.resetAllPanels();
+
+                    document.getElementById('GridResultArea').innerHTML = this.responseText;
+                    
                     loadForm.bindEditButton();
                     loadForm.bindDeleteButton();
                 }
@@ -90,8 +101,8 @@
                 let form = document.forms['search_series'];
                 form.reset();
 
-                document.getElementById('GridResultArea').innerHTML = '';
-                document.getElementById('SaveFormArea').innerHTML = '';
+                let loadForm = new seriesForms();
+                loadForm.resetAllPanels();
             });
         });
     }
@@ -112,9 +123,7 @@
                 let xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function loadSaveForm() {
                     if (this.readyState == 4 && this.status == 200) {
-                        //document.getElementById('SaveFormArea').innerHTML = this.responseText;
-                        //console.log("loaded search results");
-                        
+                        document.getElementById('SaveFormArea').innerHTML = this.responseText;
                     }
                 }
 
@@ -125,6 +134,49 @@
 
 
         });
+    }
+
+    addAddEntityHander(elements) {
+        let el = (elements == null || elements == undefined) ? document.querySelectorAll('[data-action=add]') : elements;
+
+        el.forEach(function (item) {
+            item.addEventListener('click', function resultsAddClick(e) {
+
+                e.preventDefault();
+
+                let id = 0;
+
+                let xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function loadSaveForm() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        let loadForm = new seriesForms();
+                        loadForm.resetAllPanels();
+
+                        document.getElementById('SaveFormArea').innerHTML = this.responseText;
+                        
+                        loadForm.bindResetButton();
+                        loadForm.bindSaveButton();
+                    }
+                }
+
+                xhr.open('get', `/admin/singleseries/save/${id}`, true);
+                xhr.send();
+
+            });
+        });
+    }
+
+    static resetAllPanels() {
+        seriesFormsBase.resetFormPanel();
+        seriesFormsBase.resetsearchGridPanel();
+    }
+
+    static resetsearchGridPanel() {
+        document.getElementById('GridResultArea').innerHTML = '';
+    }
+
+    static resetFormPanel() {
+        document.getElementById('SaveFormArea').innerHTML = '';
     }
 
 }
@@ -154,11 +206,20 @@ export class seriesForms extends seriesFormsBase {
         super.addResetPageHandler();
     }
 
+    bindAddButton() {
+        super.addAddEntityHander();
+    }
+
+    resetAllPanels() {
+        seriesForms.resetAllPanels();
+    }
+
     bindInit() {
         this.bindEditButton();
         this.bindDeleteButton();
         this.bindSaveButton();
         this.bindSearchButton();
-        this.bindResetButton();        
+        this.bindResetButton();
+        this.bindAddButton();
     }
 }

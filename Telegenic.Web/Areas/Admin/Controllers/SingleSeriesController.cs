@@ -21,7 +21,7 @@ namespace Telegenic.Web.Areas.Admin.Controllers
             _seriesRepository = (SeriesRepository)seriesRepository;
         }
 
-        // GET: Admin/SingleSeries
+        // GET: Admin/SingleSeries - load search panel
         public ActionResult Index()
         {
             var vm = new vmSearch("Search Series");
@@ -33,7 +33,7 @@ namespace Telegenic.Web.Areas.Admin.Controllers
         {
             return View();
         }
-
+        
         public ActionResult Find()
         {
             var results = _seriesRepository.GetAll();
@@ -54,7 +54,7 @@ namespace Telegenic.Web.Areas.Admin.Controllers
         public ActionResult Save(int? id)
         {
             var vm = new vmEntity(_genreRepository.GetAll());
-            vm.Series = id != null ? _seriesRepository.GetById(id.GetValueOrDefault()) : new Series();
+            vm.Series = id != 0 ? _seriesRepository.GetById(id.GetValueOrDefault()) : new Series();
             vm.PageHeading = id != null ? string.Format("Edit Series: {0}", vm.Series.Title) : string.Format("Add New Series");
 
             return PartialView("_savePanel",vm);
@@ -70,7 +70,7 @@ namespace Telegenic.Web.Areas.Admin.Controllers
                 try
                 {
                     _seriesRepository.Save(vm.Series);
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Detail", new { id = vm.Series.Id });
                 }
                 catch (Exception ex)
                 {
@@ -80,14 +80,22 @@ namespace Telegenic.Web.Areas.Admin.Controllers
             }
 
             return View(vm);
+        }
 
+        public ActionResult Detail(int id)
+        {
+            var vm = new vmEntity(_genreRepository.GetAll());
+            vm.Series = id > 0 ? _seriesRepository.GetById(id) : new Series();
+            vm.PageHeading = string.Format("Series: {0}", vm.Series.Title);
+
+            return PartialView("_detailPanel", vm);
         }
 
         public ActionResult Delete(int id)
         {
             var series = _seriesRepository.GetById(id);
             _seriesRepository.Delete(series);
-            return RedirectToAction("Index");
+            return RedirectToAction("Find");
         }
     }
 }
