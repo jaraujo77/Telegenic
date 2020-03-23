@@ -29,19 +29,6 @@ namespace Telegenic.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(vmSearch vm)
-        {
-            return View();
-        }
-        
-        public ActionResult Find()
-        {
-            var results = _seriesRepository.GetAll();
-
-            return PartialView("_gridResultsPanel", results);
-        }
-
-        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Find(vmSearch vm)
         {
