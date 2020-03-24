@@ -23,6 +23,13 @@ namespace Telegenic.Web.Areas.Admin.Controllers
             return View(vm);
         }
 
+        public ActionResult Find()
+        {
+            var results = _genreRepository.GetAll();
+
+            return PartialView("_gridResultsPanel", results);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Find(vmSearch vm)
@@ -56,12 +63,12 @@ namespace Telegenic.Web.Areas.Admin.Controllers
                 }
                 catch (Exception ex)
                 {
-                    return View(vm);
+                    return PartialView("_savePanel", vm);
                 }
 
             }
 
-            return View(vm);
+            return PartialView("_savePanel", vm);
         }
 
         public ActionResult Detail(int id)
@@ -75,8 +82,8 @@ namespace Telegenic.Web.Areas.Admin.Controllers
 
         public ActionResult Delete(int id)
         {
-            var series = _genreRepository.GetById(id);
-            _genreRepository.Delete(series);
+            var genre = _genreRepository.GetById(id);
+            _genreRepository.Delete(genre);
             return RedirectToAction("Find");
         }
     }

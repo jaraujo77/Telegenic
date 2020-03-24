@@ -72,12 +72,12 @@ namespace Telegenic.Web.Areas.Admin.Controllers
                 }
                 catch (Exception ex)
                 {
-                    return View(vm);
+                    return PartialView("_savePanel", vm);
                 }
 
             }
 
-            return View(vm);
+            return PartialView("_savePanel", vm);
         }
 
         public ActionResult Detail(int id)

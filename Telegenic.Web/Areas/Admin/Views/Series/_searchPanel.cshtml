@@ -2,7 +2,7 @@
 @model vmSearch
 
 
-@using (Html.BeginForm("Find", "SingleSeries", FormMethod.Post, new { @name="search_series" }))
+@using (Html.BeginForm("Find", "Series", FormMethod.Post, new { @name="search_series" }))
 {
     @Html.AntiForgeryToken()
     <div class="panel panel-primary">

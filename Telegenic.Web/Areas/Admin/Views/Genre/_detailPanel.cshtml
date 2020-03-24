@@ -1,0 +1,23 @@
+﻿@using Telegenic.Entities.ViewModels;
+@using Telegenic.Entities.Models;
+
+@model vmEntity
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading ">
+        <h1 class="panel-title">@Model.PageHeading</h1>
+    </div>
+    <div class="panel-body">
+        <div class="panel-info">
+            @Html.LabelFor(m => m.Series.Title, new { @class = "" })
+        </div>
+        <div>
+            <p>
+                <strong>
+                    @Html.DisplayFor(m => m.Genre.Title, new { @class = "" })
+                </strong>
+            </p>
+        </div>
+    </div>
+</div>

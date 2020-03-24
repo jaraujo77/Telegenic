@@ -192,6 +192,7 @@
     <Content Include="gulpfile.js" />
     <Content Include="Include\css\telegenic.site.min.css" />
     <Content Include="Include\js\Admin\formBase.js" />
+    <Content Include="Include\js\Admin\formBinder.js" />
     <Content Include="Include\js\Admin\genreForms.js" />
     <Content Include="Include\js\Admin\seriesForms.js" />
     <Content Include="Include\js\appStart.js" />
@@ -333,6 +334,7 @@
     <Content Include="Areas\Admin\Views\Genre\_searchPanel.cshtml" />
     <Content Include="Areas\Admin\Views\Season\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Season\Save.cshtml" />
+    <Content Include="Areas\Admin\Views\Genre\_detailPanel.cshtml" />
     <None Include="Properties\PublishProfiles\Debug.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <Content Include="Scripts\esm\popper-utils.js" />
