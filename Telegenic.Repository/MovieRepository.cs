@@ -14,7 +14,7 @@ namespace Telegenic.Repository
         public IEnumerable<IVideo> GetByTitle(string _title)
         {
             var query = _session.Query<Movie>().Where(x => x.Title.StartsWith(_title));
-            return query.ToList<Movie>();
+            return query.OrderBy(x => x.Title).ToList<Movie>();
         }
 
         public IEnumerable<IVideo> GetFeaturedItems()

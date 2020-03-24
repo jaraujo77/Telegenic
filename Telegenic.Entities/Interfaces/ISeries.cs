@@ -7,6 +7,6 @@ namespace Telegenic.Entities.Interfaces
     {        
         IEnumerable<ISeason> Seasons { get; set; }
 
-        int SeasonCount();
+        int SeasonCount { get; }
     }
 }

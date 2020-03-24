@@ -19,29 +19,34 @@ namespace Telegenic.Web.Areas.Admin.Controllers
         // GET: Admin/Genre
         public ActionResult Index()
         {
-            var entities = _genreRepository.GetAll();
-            var vm = new vmEntityList<Genre>(entities, "Genre Admin");
+            var vm = new vmSearch("Search Genre");
             return View(vm);
         }
 
-        // GET: Admin/Genre/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Find()
         {
-            var vm = new vmEntity();
-            vm.Genre = id > 0 ? _genreRepository.GetById(id) : new Genre();
-            vm.PageHeading = string.Format("Genre: {0}", vm.Genre.Name);
+            var results = _genreRepository.GetAll();
 
-            return View(vm);
+            return PartialView("_gridResultsPanel", results);
         }
 
-        // GET: Admin/Genre/Save        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Find(vmSearch vm)
+        {
+            var results = !string.IsNullOrWhiteSpace(vm.SearchTerm) ? _genreRepository.GetByTitle(vm.SearchTerm) : _genreRepository.GetAll();
+
+            return PartialView("_gridResultsPanel", results);
+        }
+
+        // GET: Admin/Genre/Save
         public ActionResult Save(int? id)
         {
             var vm = new vmEntity();
-            vm.Genre = id != null ? _genreRepository.GetById(id.GetValueOrDefault()) : new Genre();
-            vm.PageHeading = id != null ? string.Format("Edit Genre: {0}", vm.Genre.Name) : string.Format("Add New Genre");
+            vm.Genre = id != 0 ? _genreRepository.GetById(id.GetValueOrDefault()) : new Genre();
+            vm.PageHeading = id != null ? string.Format("Edit Genre: {0}", vm.Genre.Title) : string.Format("Add New Genre");
 
-            return View(vm);
+            return PartialView("_savePanel", vm);
         }
 
         // POST: Admin/Genre/Save
@@ -50,28 +55,36 @@ namespace Telegenic.Web.Areas.Admin.Controllers
         public ActionResult Save(vmEntity vm)
         {
             if (ModelState.IsValid)
-            {   
+            {
                 try
                 {
                     _genreRepository.Save(vm.Genre);
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Detail", new { id = vm.Genre.Id });
                 }
                 catch (Exception ex)
                 {
-                    return View(vm);
+                    return PartialView("_savePanel", vm);
                 }
-                
+
             }
 
-            return View(vm);
+            return PartialView("_savePanel", vm);
         }
 
-        // GET: Admin/Genre/Delete/5
+        public ActionResult Detail(int id)
+        {
+            var vm = new vmEntity();
+            vm.Genre = id > 0 ? _genreRepository.GetById(id) : new Genre();
+            vm.PageHeading = string.Format("Genre: {0}", vm.Genre.Title);
+
+            return PartialView("_detailPanel", vm);
+        }
+
         public ActionResult Delete(int id)
         {
             var genre = _genreRepository.GetById(id);
             _genreRepository.Delete(genre);
-            return RedirectToAction("Index");
+            return RedirectToAction("Find");
         }
     }
 }

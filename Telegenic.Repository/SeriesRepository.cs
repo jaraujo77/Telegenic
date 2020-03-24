@@ -14,12 +14,12 @@ namespace Telegenic.Repository
         public IEnumerable<ISeries> GetByTitle(string _title)
         {
             var query = _session.Query<Series>().Where(x => x.Title.StartsWith(_title));
-            return query.ToList<Series>();
+            return query.OrderBy(x => x.Title).ToList<Series>();
         }
 
         public IEnumerable<ISeries> GetFeaturedItems()
         {
-            var query = _session.Query<Series>();//TODO add filter             
+            var query = _session.Query<Series>();//TODO add filter
             return query.ToList<Series>();
         }
     }

@@ -14,7 +14,7 @@ namespace Telegenic.Repository
         public IEnumerable<IGenre> GetByTitle(string _name)
         {
             var query = _session.Query<Genre>().Where(x => x.Name.StartsWith(_name));
-            return query.ToList<Genre>();
+            return query.OrderBy(x => x.Title).ToList<Genre>();
         }
     }
 }

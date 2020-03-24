@@ -1,0 +1,63 @@
+﻿@using Telegenic.Entities.Models
+@model List<Series>
+
+@{ var count = 0;}
+
+<div class="table-responsive">
+    <table class="table table-condensed table-bordered table-hover">
+        <thead>
+            <tr>
+                <th scope="col">
+                    <label>Edit</label>
+                </th>
+                <th scope="col">
+                    @Html.LabelFor(m => m.FirstOrDefault().Title)
+                </th>
+                <th scope="col">
+                    @Html.LabelFor(m => m.FirstOrDefault().Genre.Title)
+                </th>
+                <th scope="col">
+                    @Html.LabelFor(m => m.FirstOrDefault().SeasonCount)
+                </th>
+                <th scope="col">
+                    <label>Delete</label>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                var rowClass = count % 2 == 0 ? "table-primary" : "table-secondary";
+                count++;
+
+            <tr class=@rowClass>
+                <th scope="row">
+                    <a href="@Url.Action("Save")"
+                       class="btn btn-default btn-sm"
+                       data-action="edit"
+                       data-val="@item.Id">
+                        <i class="glyphicon glyphicon-edit"></i>
+                    </a>
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SeasonCount)
+                </td>
+                <td>
+                    <a href="@Url.Action("Delete")"
+                       class="btn btn-default btn-sm"
+                       data-action="delete"
+                       data-val="@item.Id">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
