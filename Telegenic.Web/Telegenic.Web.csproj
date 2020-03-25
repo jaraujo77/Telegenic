@@ -175,6 +175,7 @@
     <Compile Include="Plumbing\CastleWindsor\Installers\PersistenceInstaller.cs" />
     <Compile Include="Plumbing\CastleWindsor\Installers\RepositoriesInstaller.cs" />
     <Compile Include="Plumbing\CastleWindsor\WindsorControllerFactory.cs" />
+    <Compile Include="Plumbing\MVCHelpers\HtmlHelpers.cs" />
     <Compile Include="Plumbing\nHibernate\Maps\BaseMaps.cs" />
     <Compile Include="Plumbing\nHibernate\PersistenceFacility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

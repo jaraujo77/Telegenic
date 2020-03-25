@@ -1,5 +1,6 @@
 ﻿@using Telegenic.Entities.ViewModels;
 @using Telegenic.Entities.Models;
+@using Telegenic.Web.Plumbing.MVCHelpers;
 @model vmEntity
 
     <div class="panel panel-primary">
@@ -64,7 +65,7 @@
             <div>
                 <p>
                     <strong>
-                        @( Model.Movie.ElenaFriendly ? "Yes" : "No")
+                        @Html.YesNo(m => m.Movie.ElenaFriendly)
                     </strong>
                 </p>
             </div>
