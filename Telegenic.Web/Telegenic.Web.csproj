@@ -166,7 +166,6 @@
     <Compile Include="Areas\Admin\Controllers\MovieController.cs" />
     <Compile Include="Areas\Admin\Controllers\SeasonController.cs" />
     <Compile Include="Areas\Admin\Controllers\SeriesController.cs" />
-    <Compile Include="Areas\Admin\Controllers\SingleSeriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -193,8 +192,6 @@
     <Content Include="Include\css\telegenic.site.min.css" />
     <Content Include="Include\js\Admin\formBase.js" />
     <Content Include="Include\js\Admin\formBinder.js" />
-    <Content Include="Include\js\Admin\genreForms.js" />
-    <Content Include="Include\js\Admin\seriesForms.js" />
     <Content Include="Include\js\appStart.js" />
     <Content Include="Include\js\main.js" />
     <Content Include="Include\js\telegenic.main.bundle.js" />
@@ -308,7 +305,6 @@
     <Content Include="Areas\Admin\Views\Movie\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Movie\Save.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Admin\Views\SingleSeries\Index.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -319,10 +315,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap\_glyphicon.scss" />
-    <Content Include="Areas\Admin\Views\SingleSeries\_searchPanel.cshtml" />
-    <Content Include="Areas\Admin\Views\SingleSeries\_gridResultsPanel.cshtml" />
-    <Content Include="Areas\Admin\Views\SingleSeries\_savePanel.cshtml" />
-    <Content Include="Areas\Admin\Views\SingleSeries\_detailPanel.cshtml" />
     <Content Include="Areas\Admin\Views\Series\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Series\_detailPanel.cshtml" />
     <Content Include="Areas\Admin\Views\Series\_gridResultsPanel.cshtml" />
@@ -335,6 +327,10 @@
     <Content Include="Areas\Admin\Views\Season\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Season\Save.cshtml" />
     <Content Include="Areas\Admin\Views\Genre\_detailPanel.cshtml" />
+    <Content Include="Areas\Admin\Views\Movie\_searchPanel.cshtml" />
+    <Content Include="Areas\Admin\Views\Movie\_gridResultsPanel.cshtml" />
+    <Content Include="Areas\Admin\Views\Movie\_savePanel.cshtml" />
+    <Content Include="Areas\Admin\Views\Movie\_detailPanel.cshtml" />
     <None Include="Properties\PublishProfiles\Debug.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <Content Include="Scripts\esm\popper-utils.js" />

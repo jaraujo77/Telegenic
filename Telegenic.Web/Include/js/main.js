@@ -1,4 +1,5 @@
 ﻿'use strict'
 
 require('./appStart');
-require('./Admin/seriesForms');
+require('./Admin/formBase');
+require('./Admin/formBinder');

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Telegenic.Entities.Models;
 using Telegenic.Entities.ViewModels;
@@ -21,31 +22,37 @@ namespace Telegenic.Web.Areas.Admin.Controllers
         // GET: Admin/Movie
         public ActionResult Index()
         {
-            var entities = _movieRepository.GetAll();
-            var vm = new vmEntityList<Movie>(entities, "Movie Admin");
+            var vm = new vmSearch("Search Movies");
             return View(vm);
         }
 
-        // GET: Admin/Movie/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Find()
         {
-            var vm = new vmEntity(_genreRepository.GetAll());
-            vm.Movie = id > 0 ? _movieRepository.GetById(id) : new Movie();
-            vm.PageHeading = $"Movie: {vm.Movie.Title}";
+            var results = _movieRepository.GetAll();
 
-            return View(vm);
+            return PartialView("_gridResultsPanel", results);
         }
 
-        // GET: Admin/Movie/Save
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Find(vmSearch vm)
+        {
+            var results = !string.IsNullOrWhiteSpace(vm.SearchTerm) ? _movieRepository.GetByTitle(vm.SearchTerm) : _movieRepository.GetAll();
+
+            return PartialView("_gridResultsPanel", results);
+        }
+
+        // GET: Admin/Series/Create
         public ActionResult Save(int? id)
         {
-            var vm = new vmEntity(_genreRepository.GetAll());
-            vm.Movie = id != null ? _movieRepository.GetById(id.GetValueOrDefault()) : new Movie();
-            vm.PageHeading = id != null ? $"Edit Movie {vm.Movie.Title}" : "Add New Movie";
-            return View(vm);
+            var vm = new vmEntity(_genreRepository.GetAll().OrderBy(x => x.Title));
+            vm.Movie = id != 0 ? _movieRepository.GetById(id.GetValueOrDefault()) : new Movie();
+            vm.PageHeading = id != null ? string.Format("Edit Movie: {0}", vm.Movie.Title) : string.Format("Add New Movie");
+
+            return PartialView("_savePanel", vm);
         }
 
-        // POST: Admin/Movie/Save
+        // POST: Admin/Series/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Save(vmEntity vm)
@@ -55,24 +62,32 @@ namespace Telegenic.Web.Areas.Admin.Controllers
                 try
                 {
                     _movieRepository.Save(vm.Movie);
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Detail", new { id = vm.Movie.Id });
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    return View(vm);
+                    return PartialView("_savePanel", vm);
                 }
+
             }
 
-            return View(vm);
+            return PartialView("_savePanel", vm);
         }
-        
-        // GET: Admin/Movie/Delete/5
+
+        public ActionResult Detail(int id)
+        {
+            var vm = new vmEntity(_genreRepository.GetAll().OrderBy(x => x.Title));
+            vm.Movie = id > 0 ? _movieRepository.GetById(id) : new Movie();
+            vm.PageHeading = string.Format("Movie: {0}", vm.Movie.Title);
+
+            return PartialView("_detailPanel", vm);
+        }
+
         public ActionResult Delete(int id)
         {
             var movie = _movieRepository.GetById(id);
             _movieRepository.Delete(movie);
-
-            return RedirectToAction("Index");
+            return RedirectToAction("Find");
         }
 
     }

@@ -4,7 +4,7 @@
 @model vmEntity
 
 
-@using (Html.BeginForm("Save", "SingleSeries", FormMethod.Post, new { @name = "save_series"} ))
+@using (Html.BeginForm("Save", "Series", FormMethod.Post, new { @name = "save_series"} ))
 {
     @Html.AntiForgeryToken()
 
@@ -33,8 +33,8 @@
                     &nbsp;Submit
                 </button>
                 <a id="btnReset" 
-                   class="btn btn-primary" 
-                   href="@Url.Action("Index", "SingleSeries", new { area = "Admin" })"
+                   class="btn btn-primary"
+                   href="@Url.Action("Index", "Series", new { area = "Admin" })"
                    data-action="cancelSave">
                     <i class="glyphicon glyphicon-remove"></i>
                     &nbsp;Cancel

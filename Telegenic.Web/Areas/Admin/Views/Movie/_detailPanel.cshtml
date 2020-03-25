@@ -1,0 +1,78 @@
+﻿@using Telegenic.Entities.ViewModels;
+@using Telegenic.Entities.Models;
+@model vmEntity
+
+    <div class="panel panel-primary">
+        <div class="panel-heading ">
+            <h1 class="panel-title">@Model.PageHeading</h1>
+        </div>
+        <div class="panel-body">
+            <div class="panel-info">
+                @Html.LabelFor(model => model.Movie.Title, new { @class = "" })
+            </div>
+            <div>
+                <p>
+                    <strong>
+                        @Html.DisplayFor(m => m.Movie.Title, new { @class = "" })
+                    </strong>
+                </p>
+            </div>
+
+            <div class="panel-info">
+                @Html.LabelFor(m => m.Movie.Genre.Name, new { @class = "" })
+            </div>
+            <div>
+                <p>
+                    <strong>
+                        @Html.DisplayFor(m => m.Movie.Genre.Name, new { @class = "" })
+                    </strong>
+                </p>
+            </div>
+            <div class="panel-info">
+                @Html.LabelFor(m => m.Movie.Runtime, new { @class = "" })
+            </div>
+            <div>
+                <p>
+                    <strong>
+                        @Html.DisplayFor(m => m.Movie.Runtime, new { @class = "" })
+                    </strong>
+                </p>
+            </div>
+            <div class="panel-info">
+                @Html.LabelFor(m => m.Movie.PlaceholderImagePath, new { @class = "" })
+            </div>
+            <div>
+                <p>
+                    <strong>
+                        @Html.DisplayFor(m => m.Movie.PlaceholderImagePath, new { @class = "" })
+                    </strong>
+                </p>
+            </div>
+            <div class="panel-info">
+                @Html.LabelFor(m => m.Movie.Rating, new { @class = "" })
+            </div>
+            <div>
+                <p>
+                    <strong>
+                        @Html.DisplayFor(m => m.Movie.Rating, new { @class = "" })
+                    </strong>
+                </p>
+            </div>
+            <div class="panel-info">
+                @Html.LabelFor(m => m.Movie.ElenaFriendly, new { @class = "" })
+            </div>
+            <div>
+                <p>
+                    <strong>
+                        @( Model.Movie.ElenaFriendly ? "Yes" : "No")
+                    </strong>
+                </p>
+            </div>
+
+        </div>
+        <div class="panel-body">
+            <div class="panel-info">
+                Add action links here to maintain seasons and list episodes
+            </div>
+        </div>
+    </div>
