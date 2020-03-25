@@ -332,6 +332,10 @@
     <Content Include="Areas\Admin\Views\Movie\_gridResultsPanel.cshtml" />
     <Content Include="Areas\Admin\Views\Movie\_savePanel.cshtml" />
     <Content Include="Areas\Admin\Views\Movie\_detailPanel.cshtml" />
+    <Content Include="Areas\Admin\Views\Episode\_searchPanel.cshtml" />
+    <Content Include="Areas\Admin\Views\Episode\_gridResultsPanel.cshtml" />
+    <Content Include="Areas\Admin\Views\Episode\_savePanel.cshtml" />
+    <Content Include="Areas\Admin\Views\Episode\_detailPanel.cshtml" />
     <None Include="Properties\PublishProfiles\Debug.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <Content Include="Scripts\esm\popper-utils.js" />

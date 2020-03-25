@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Telegenic.Entities.Models;
 using Telegenic.Entities.ViewModels;
@@ -21,32 +22,35 @@ namespace Telegenic.Web.Areas.Admin.Controllers
         // GET: Admin/Episode
         public ActionResult Index()
         {
-            var episodes = _episodeRepository.GetAll();
-            var vm = new vmEntityList<Episode>(episodes, "Episode Admin");
-            return View(vm);
+            var vm = new vmSearch("Search Episodes");
+            
+            return View("Index",vm);
         }
 
-        // GET: Admin/Episode/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Find()
         {
-            var vm = new vmEntity();
-            vm.Episode = _episodeRepository.GetById(id);
-            vm.PageHeading = $"Episode: {vm.Episode.Title}";
+            var results = _episodeRepository.GetAll();
 
-            return View(vm);
+            return PartialView("_gridResultsPanel", results);
         }
 
-        // GET: Admin/Episode/Save
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Find(vmSearch vm)
+        {
+            var results = !string.IsNullOrEmpty(vm.SearchTerm) ? _episodeRepository.GetByTitle(vm.SearchTerm) : _episodeRepository.GetAll();
+            return PartialView("_gridResultsPanel", results);
+        }
+
         public ActionResult Save(int? id)
         {
-            var vm = new vmEntity();
-            vm.Episode = id != null ? _episodeRepository.GetById(id.GetValueOrDefault()) : new Episode();
-            vm.PageHeading = id != null ? $"Edit Episode {vm.Episode.Title}" : "Add New Episode";
+            var vm = new vmEntity(_genreRepository.GetAll().OrderBy(x => x.Title));
+            vm.Episode = id != 0 ? _episodeRepository.GetById(id.GetValueOrDefault()) : new Episode();
+            vm.PageHeading = id != null ? string.Format("Edit Episode: {0}", vm.Episode.Title) : string.Format("Add New Episode");
 
-            return View(vm);
+            return PartialView("_savePanel", vm);
         }
 
-        // POST: Admin/Episode/Save
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Save(vmEntity vm)
@@ -56,24 +60,34 @@ namespace Telegenic.Web.Areas.Admin.Controllers
                 try
                 {
                     _episodeRepository.Save(vm.Episode);
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Detail", new { id = vm.Episode.Id });
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    return View(vm);
+
+                    return PartialView("_savePanel", vm);
                 }
             }
 
-            return View(vm);
+            return PartialView("_savePanel", vm);
         }
 
-        // GET: Admin/Episode/Delete/5
+        public ActionResult Detail(int id)
+        {
+            var vm = new vmEntity(_genreRepository.GetAll().OrderBy(x => x.Title));
+            vm.Episode = id > 0 ? _episodeRepository.GetById(id) : new Episode();
+            vm.PageHeading = string.Format("Episode: {0}", vm.Episode.Title);
+
+            return PartialView("_detailPanel", vm);
+        }
+
+        [HttpPost]
         public ActionResult Delete(int id)
         {
             var episode = _episodeRepository.GetById(id);
             _episodeRepository.Delete(episode);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Find");
         }
     }
 }
