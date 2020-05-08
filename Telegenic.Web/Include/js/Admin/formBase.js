@@ -1,4 +1,5 @@
 ﻿import { formBinder } from "./formBinder";
+import { formSeason } from "./formSeason";
 
 export class formBase {
     constructor(route, searchFormName, saveFormName) {
@@ -30,12 +31,14 @@ export class formBase {
 
                         loadForm.bindResetButton();
                         loadForm.bindSaveButton();
+                        
+                        let season = new formSeason();
+                        season.addBtnEditClickHandler();
                     }
                 }
 
                 xhr.open('get', `/admin/${base.route}/save/${id}`, true);
                 xhr.send();
-
             });
         });
 

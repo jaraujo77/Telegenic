@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Telegenic.Entities.Models;
 using Telegenic.Entities.ViewModels;
@@ -10,18 +11,23 @@ namespace Telegenic.Web.Areas.Admin.Controllers
     public class SeasonController : Controller
     {
         SeasonRepository _seasonRepository;
+        EpisodeRepository _episodeRepository;
+        SeriesRepository _seriesRepository;
 
-        public SeasonController(ISeasonRepository seasonRepository)
+        public SeasonController(ISeasonRepository seasonRepository, IEpisodeRepository episodeRepository, ISeriesRepository seriesRepository)
         {
             _seasonRepository = (SeasonRepository)seasonRepository;
+            _episodeRepository = (EpisodeRepository)episodeRepository;
+            _seriesRepository = (SeriesRepository)seriesRepository;
         }
 
         // GET: Admin/Season
-        public ActionResult Index()
+        public ActionResult Index(int seriesId)
         {
-            var seasons = _seasonRepository.GetAll();
-            var vm = new vmEntityList<Season>(seasons, "Season Admin");
-            return View(vm);
+            
+            var seasons = _seasonRepository.GetSeasonsBySeriesId(seriesId);
+            var vm = new vmEntityList<Season>(seasons.Cast<Season>(), "Season Admin");
+            return PartialView("_seasonAdmin", vm);
         }
 
         // GET: Admin/Season/Details/5
@@ -38,10 +44,11 @@ namespace Telegenic.Web.Areas.Admin.Controllers
         public ActionResult Save(int? id)
         {
             var vm = new vmEntity();
+            vm.Series = id != null ? _seriesRepository.GetById(id.GetValueOrDefault()) : new Series();
             vm.Season = id != null ? _seasonRepository.GetById(id.GetValueOrDefault()) : new Season();
             vm.PageHeading = id != null ? $"Edit Season {vm.Season.Season_Number}" : "Add New Season";
 
-            return View(vm);
+            return PartialView("_seasonSave", vm);
         }
 
         // POST: Admin/Season/Save
@@ -73,5 +80,14 @@ namespace Telegenic.Web.Areas.Admin.Controllers
             _seasonRepository.Delete(season);
             return RedirectToAction("Index");
         }
+
+        // Get: 
+        public ActionResult SeasonEpisodes(int _seasonId)
+        {
+            var episodes = _episodeRepository.GetEpisodesBySeasonId(_seasonId).OrderBy(x => x.Title).Cast<Episode>();
+
+            return PartialView("_seasonEpisodes", episodes);
+        }
+
     }
 }

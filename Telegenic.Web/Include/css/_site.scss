@@ -19,3 +19,19 @@ textarea {
 .bs-docs-section {
     padding: 10px;
 }
+
+
+/*Flex*/
+.tg-flex-container{
+    display:flex
+}
+
+.tg-flex-child{
+    flex:1;
+}
+
+.tg-flex-child:first-child{
+    margin-right:20px;
+    width: 60%;
+}
+

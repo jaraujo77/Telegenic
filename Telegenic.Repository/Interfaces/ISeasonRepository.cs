@@ -6,5 +6,7 @@ namespace Telegenic.Repository.Interfaces
     public interface ISeasonRepository : IRepositoryBase
     {
         IEnumerable<ISeason> GetByTitle(string _title);
+
+        IEnumerable<ISeason> GetSeasonsBySeriesId(int _seriesId);
     }
 }

@@ -1,0 +1,35 @@
+﻿
+@using Telegenic.Entities.ViewModels;
+@using Telegenic.Entities.Models;
+@model vmEntity
+
+<h2>@Model.PageHeading</h2>
+
+
+<div>
+    @using (Html.BeginForm("Save", "Season", FormMethod.Post, new { @name = "save_season" }))
+    {
+        @Html.AntiForgeryToken()
+        <fieldset>
+            @Html.HiddenFor(m => m.Season.Id)
+            <div class="form-group">
+                @Html.LabelFor(model => model.Season.Title, new { @class = "col-sm-2 col-form-label" })
+                @Html.EditorFor(model => model.Season.Title, new { htmlAttributes = new { @class = "form-control", @placeholder = "Title" } })
+
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Season.Season_Number, new { @class = "col-sm-2 col-form-label" })
+                @Html.EditorFor(model => model.Season.Season_Number, new { htmlAttributes = new { @class = "form-control" } })
+
+            </div>
+
+            <button type="submit" id="btnSeasonSubmit" class="btn btn-primary">Submit</button>
+            @Html.ActionLink("Cancel", "Index", "Season", new { area = "Admin" }, new { @class = "btn btn-primary", id = "btnSeasonCancel" })
+        </fieldset>
+    }
+</div>
+
+<div>
+    @Html.Action("SeasonEpisodes", "Season", new { area = "Admin", _seasonId = Model.Season.Id })
+</div>
+

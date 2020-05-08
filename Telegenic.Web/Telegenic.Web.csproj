@@ -193,6 +193,7 @@
     <Content Include="Include\css\telegenic.site.min.css" />
     <Content Include="Include\js\Admin\formBase.js" />
     <Content Include="Include\js\Admin\formBinder.js" />
+    <Content Include="Include\js\Admin\formSeason.js" />
     <Content Include="Include\js\appStart.js" />
     <Content Include="Include\js\main.js" />
     <Content Include="Include\js\telegenic.main.bundle.js" />
@@ -336,6 +337,10 @@
     <Content Include="Areas\Admin\Views\Episode\_gridResultsPanel.cshtml" />
     <Content Include="Areas\Admin\Views\Episode\_savePanel.cshtml" />
     <Content Include="Areas\Admin\Views\Episode\_detailPanel.cshtml" />
+    <Content Include="Areas\Admin\Views\Series\_seasonAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\Season\_seasonAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\Season\_seasonSave.cshtml" />
+    <Content Include="Areas\Admin\Views\Season\_seasonEpisodes.cshtml" />
     <None Include="Properties\PublishProfiles\Debug.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <Content Include="Scripts\esm\popper-utils.js" />
