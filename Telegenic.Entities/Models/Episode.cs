@@ -29,5 +29,6 @@ namespace Telegenic.Entities.Models
         [Display(Name = "Episode Number")]
         public virtual int EpisodeNumber { get; set; }
         
+        public virtual int Season_Id { get; set; }
     }
 }

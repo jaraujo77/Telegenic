@@ -59,6 +59,8 @@ namespace Telegenic.Web.Areas.Admin.Controllers
             {
                 try
                 {
+                    //TODO Fix this to use a season assignment
+                    vm.Episode.Season_Id = 15;
                     _episodeRepository.Save(vm.Episode);
                     return RedirectToAction("Detail", new { id = vm.Episode.Id });
                 }

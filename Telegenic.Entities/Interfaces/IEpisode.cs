@@ -9,5 +9,7 @@ namespace Telegenic.Entities.Interfaces
     public interface IEpisode : IVideo
     {
         int EpisodeNumber { get; set; }
+
+        int Season_Id { get; set; }
     }
 }

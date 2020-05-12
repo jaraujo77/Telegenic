@@ -9,5 +9,7 @@ namespace Telegenic.Entities.Interfaces
         int Season_Number { get; set; }
 
         int EpisodeCount();
+
+        int Series_Id { get; set; }
     }
 }

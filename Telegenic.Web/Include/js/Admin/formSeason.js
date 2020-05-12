@@ -7,7 +7,7 @@
             item.addEventListener('click', function setEditClickHandler(e) {
                 e.preventDefault();
                 console.log("clicked Season Edit Button!");
-                console.log("Route to get: " + el.pathname);
+                console.log("Route to get: " + item.pathname + item.search);
 
                 let xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function loadSeasonEditForm() {
@@ -17,9 +17,9 @@
                         season.addBtnSeasonSubmitClickHander();
                         season.addBtnSeasonCancelClickHandler();
                     }
-                }
+                }                
 
-                xhr.open('get', item.pathname, true);
+                xhr.open('get', item.pathname + item.search, true);
                 xhr.send();
             });
         });
@@ -64,7 +64,7 @@
                 }
             }
 
-            xhr.open('get', el.pathname, true);
+            xhr.open('get', el.pathname + el.search, true);
             xhr.send();
         });
     }

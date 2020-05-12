@@ -6,42 +6,48 @@
 
 @{ var count = 0; }
 
-<h2>@Model.PageHeading</h2>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h1 class="panel-title">@Model.PageHeading</h1>
+    </div>
+    <div class="panel-body">
+        <div>
+            @Html.ActionLink("Add New Season", "Save", new {_seasonId = 0, _seriesId = Model.SearchEntity.Id}, new { id = "btnEdit" })
+        </div>
+        <div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.Entities.FirstOrDefault().Title)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.Entities.FirstOrDefault().Season_Number)
+                        </th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Entities)
+                    {
+                        var rowClass = count % 2 == 0 ? "table-primary" : "table-secondary";
+                        count++;
 
-<p>
-    @Html.ActionLink("Create New", "Save", null, new { id = "btnEdit" })
-</p>
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col">
-                @Html.DisplayNameFor(model => model.Entities.FirstOrDefault().Title)
-            </th>
-            <th scope="col">
-                @Html.DisplayNameFor(model => model.Entities.FirstOrDefault().Season_Number)
-            </th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Entities)
-        {
-            var rowClass = count % 2 == 0 ? "table-primary" : "table-secondary";
-            count++;
-
-            <tr class=@rowClass>
-                <th scope="row">
-                    @Html.DisplayFor(modelItem => item.Title)
-                </th>
-                <th scope="row">
-                    @Html.DisplayFor(modelItem => item.Season_Number)
-                </th>
-                <td>
-                    @Html.ActionLink("Edit", "Save", new { id = item.Id }, new { id = "btnEdit"}) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { id = "btnDelete"})
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
+                        <tr class=@rowClass>
+                            <th scope="row">
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </th>
+                            <th scope="row">
+                                @Html.DisplayFor(modelItem => item.Season_Number)
+                            </th>
+                            <td>
+                                @Html.ActionLink("Edit", "Save", new { _seasonId = item.Id, _seriesId = Model.SearchEntity.Id }, new { id = "btnEdit" }) |
+                                @Html.ActionLink("Delete", "Delete", new { _seasonId = item.Id, _seriesId = Model.SearchEntity.Id }, new { id = "btnDelete" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

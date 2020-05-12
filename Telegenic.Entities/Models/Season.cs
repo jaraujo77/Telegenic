@@ -25,5 +25,7 @@ namespace Telegenic.Entities.Models
             return Episodes.Count();
         }
 
+        public virtual int Series_Id { get; set; }
+
     }
 }
