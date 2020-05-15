@@ -25,8 +25,9 @@ namespace Telegenic.Web.Areas.Admin.Controllers
         public ActionResult Index(int seriesId)
         {            
             var seasons = _seasonRepository.GetSeasonsBySeriesId(seriesId);
-            var vm = new vmEntityList<Season>(seasons.Cast<Season>(), "Season Admin");
+            var vm = new vmEntityList<Season>(seasons.Cast<Season>());
             vm.SearchEntity = _seriesRepository.GetById(seriesId);
+            vm.PageHeading = string.Format("{0} Seasons", vm.SearchEntity.Title);
             return PartialView("_seasonAdmin", vm);
         }
 
@@ -47,7 +48,7 @@ namespace Telegenic.Web.Areas.Admin.Controllers
             vm.Series = _seriesRepository.GetById(_seriesId);
             vm.Season = _seasonId > 0 ? _seasonRepository.GetById(_seasonId) : new Season();
             vm.Season.Series_Id = _seriesId;
-            vm.PageHeading = _seasonId > 0 ? $"Edit Season {vm.Season.Season_Number}" : "Add New Season";
+            vm.PageHeading = _seasonId > 0 ? $"Edit {vm.Series.Title} Season {vm.Season.Season_Number}" : "Add New Season";
 
             return PartialView("_seasonSave", vm);
         }

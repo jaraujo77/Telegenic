@@ -2,13 +2,14 @@
 @model vmSearch
 
 
-@using (Html.BeginForm("Find", "Series", FormMethod.Post, new { @name="search_series" }))
-{
-    @Html.AntiForgeryToken()
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h1 class="panel-title">@Model.SearchHeading</h1>
-        </div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h1 class="panel-title">@Model.SearchHeading</h1>
+    </div>
+    @using (Html.BeginForm("Find", "Series", FormMethod.Post, new { @name = "search_series" }))
+    {
+        @Html.AntiForgeryToken()
         <div class="panel-body">
             <div class="form-group">
                 @Html.LabelFor(m => m.SearchTerm, "Title")
@@ -31,6 +32,8 @@
                 &nbsp;Add
             </button>
         </div>
-    </div>
-}
+    }
+
+</div>
+
 

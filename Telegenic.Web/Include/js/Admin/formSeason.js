@@ -12,7 +12,7 @@
                 let xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function loadSeasonEditForm() {
                     if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById('tg-season-panel').innerHTML = this.responseText;
+                        document.getElementById('EditFormArea').innerHTML = this.responseText;
                         let season = new formSeason();
                         season.addBtnSeasonSubmitClickHander();
                         season.addBtnSeasonCancelClickHandler();
@@ -37,7 +37,7 @@
             let xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function loadSeasonDetail() {
                 if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById('tg-season-panel').innerHTML = this.responseText;
+                    document.getElementById('EditFormArea').innerHTML = this.responseText;
                     let season = new formSeason();
                     season.addBtnEditClickHandler();
                 }
@@ -50,22 +50,41 @@
     }
 
     addBtnSeasonCancelClickHandler() {
-        let el = document.getElementById('btnSeasonCancel');
+        let el = document.querySelectorAll('#btnSeasonCancel');
 
-        el.addEventListener('click', function cancelSeasonEditForm(e) {
-            e.preventDefault();
 
-            let xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function loadSeasonEditForm() {
-                if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById('tg-season-panel').innerHTML = this.responseText;
-                    let season = new formSeason();
-                    season.addBtnEditClickHandler();
+        el.forEach(function setSeasonCancelClickHandlers(item) {
+            item.addEventListener('click', function cancelSeasonEditForm(e) {
+                e.preventDefault();
+                let xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function loadSeasonEditForm() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById('EditFormArea').innerHTML = this.responseText;
+                        let season = new formSeason();
+                        season.addBtnEditClickHandler();
+                    }
                 }
-            }
 
-            xhr.open('get', el.pathname + el.search, true);
-            xhr.send();
+                xhr.open('get', item.pathname + item.search, true);
+                xhr.send();
+
+            });
         });
+
+        //el.addEventListener('click', function cancelSeasonEditForm(e) {
+        //    e.preventDefault();
+
+        //    let xhr = new XMLHttpRequest();
+        //    xhr.onreadystatechange = function loadSeasonEditForm() {
+        //        if (this.readyState == 4 && this.status == 200) {
+        //            document.getElementById('EditFormArea').innerHTML = this.responseText;
+        //            let season = new formSeason();
+        //            season.addBtnEditClickHandler();
+        //        }
+        //    }
+
+        //    xhr.open('get', el.pathname + el.search, true);
+        //    xhr.send();
+        //});
     }
 }

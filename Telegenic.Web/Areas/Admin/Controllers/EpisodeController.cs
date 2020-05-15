@@ -42,6 +42,7 @@ namespace Telegenic.Web.Areas.Admin.Controllers
             return PartialView("_gridResultsPanel", results);
         }
 
+        //TODO change to _episodeId
         public ActionResult Save(int? id)
         {
             var vm = new vmEntity(_genreRepository.GetAll().OrderBy(x => x.Title));

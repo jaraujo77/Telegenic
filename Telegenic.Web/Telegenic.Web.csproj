@@ -340,6 +340,9 @@
     <Content Include="Areas\Admin\Views\Season\_seasonAdmin.cshtml" />
     <Content Include="Areas\Admin\Views\Season\_seasonSave.cshtml" />
     <Content Include="Areas\Admin\Views\Season\_seasonEpisodes.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Season\_seasonTableAlternating.cshtml" />
+    <Content Include="Areas\Admin\Views\Episode\_episodeCardList.cshtml" />
     <None Include="Properties\PublishProfiles\Debug.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <Content Include="Scripts\esm\popper-utils.js" />
@@ -463,7 +466,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Include\images\" />
   </ItemGroup>
   <ItemGroup>

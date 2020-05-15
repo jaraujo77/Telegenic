@@ -23,21 +23,21 @@ namespace Telegenic.Web.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var vm = new vmSearch("Search Series");
-            return View(vm);
+            return View("_searchPanel", vm);
         }
 
-        [HttpPost]
-        public ActionResult Index(vmSearch vm)
-        {
-            return View();
-        }
+        //[HttpPost]
+        //public ActionResult Index(vmSearch vm)
+        //{
+        //    return View();
+        //}
 
-        public ActionResult Find()
-        {
-            var results = _seriesRepository.GetAll();
+        //public ActionResult Find()
+        //{
+        //    var results = _seriesRepository.GetAll();
 
-            return PartialView("_gridResultsPanel", results);
-        }
+        //    return PartialView("_gridResultsPanel", results);
+        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -48,7 +48,7 @@ namespace Telegenic.Web.Areas.Admin.Controllers
             return PartialView("_gridResultsPanel", results);
         }
 
-        // GET: Admin/Series/Create
+        // GET: Admin/Series/Save
         public ActionResult Save(int? id)
         {
             var vm = new vmEntity(_genreRepository.GetAll().OrderBy(x => x.Title));
@@ -58,7 +58,7 @@ namespace Telegenic.Web.Areas.Admin.Controllers
             return PartialView("_savePanel", vm);
         }
 
-        // POST: Admin/Series/Create
+        // POST: Admin/Series/Save
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Save(vmEntity vm)

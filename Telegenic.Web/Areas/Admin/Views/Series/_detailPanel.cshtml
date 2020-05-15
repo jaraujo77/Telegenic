@@ -31,9 +31,7 @@
                 </p>
             </div>
         </div>
-        <div class="panel-body">
-            <div class="panel-info">
-                Add action links here to maintain seasons and list episodes
-            </div>
-        </div>
+        @{
+            Html.RenderPartial("~/Areas/Admin/Views/Season/_seasonTableAlternating.cshtml", Model.Series.Seasons.Cast<Season>());
+        }
     </div>

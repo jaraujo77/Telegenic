@@ -4,6 +4,10 @@
 @model vmEntity
 
 
+@{ 
+    var _episodes = Model.Season.Episodes != null ? Model.Season.Episodes.Cast<Episode>() : new List<Episode>();
+}
+
 
 <div class="panel panel-primary">
     <div class="panel-heading">
@@ -13,31 +17,53 @@
     </div>
 
     <div class="panel-body">
-        @using (Html.BeginForm("Save", "Season", FormMethod.Post, new { @name = "save_season" }))
-        {
-            @Html.AntiForgeryToken()
-            <fieldset>
-                @Html.HiddenFor(m => m.Season.Series_Id)
-                @Html.HiddenFor(m => m.Season.Id)
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Season.Title, new { @class = "col-sm-2 col-form-label" })
-                    @Html.EditorFor(model => model.Season.Title, new { htmlAttributes = new { @class = "form-control", @placeholder = "Title" } })
+        <div id="tg-series-edit-form" class="tg-flex-container">
+            <div class="tg-flex-child">
+                @using (Html.BeginForm("Save", "Season", FormMethod.Post, new { @name = "save_season" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <fieldset>
+                        @Html.HiddenFor(m => m.Season.Series_Id)
+                        @Html.HiddenFor(m => m.Season.Id)
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Season.Title, new { @class = "col-sm-2 col-form-label" })
+                            @Html.EditorFor(model => model.Season.Title, new { htmlAttributes = new { @class = "form-control", @placeholder = "Title" } })
 
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Season.Season_Number, new { @class = "col-sm-2 col-form-label" })
-                    @Html.EditorFor(model => model.Season.Season_Number, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Season.Season_Number, new { @class = "col-sm-2 col-form-label" })
+                            @Html.EditorFor(model => model.Season.Season_Number, new { htmlAttributes = new { @class = "form-control" } })
 
-                </div>
+                        </div>
 
-                <button type="submit" id="btnSeasonSubmit" class="btn btn-primary">Submit</button>
-                @Html.ActionLink("Cancel", "Index", "Season", new { area = "Admin", seriesId = Model.Season.Series_Id }, new { @class = "btn btn-primary", id = "btnSeasonCancel" })
-            </fieldset>
-        }
-
-        <div>
-            @Html.Action("SeasonEpisodes", "Season", new { area = "Admin", _seasonId = Model.Season.Id })
+                        <button type="submit" id="btnSeasonSubmit" class="btn btn-primary" data-action="save">
+                            <i class="glyphicon glyphicon-ok"></i>
+                            &nbsp;Submit
+                        </button>
+                        <a id="btnSeasonCancel"
+                           class="btn btn-primary"
+                           href="@Url.Action("Save", "Series", new { area = "Admin", Id = Model.Season.Series_Id })"
+                           data-action="cancelSave">
+                            <i class="glyphicon glyphicon-remove"></i>
+                            &nbsp;Cancel
+                        </a>
+                        @*@Html.ActionLink("Cancel", "Index", "Season", new { area = "Admin", seriesId = Model.Season.Series_Id }, new { @class = "btn btn-primary", id = "btnSeasonCancel" })*@
+                    </fieldset>
+                }
+            </div>
+            <div class="tg-flex-child col-lg-3">
+                @Html.ActionLink("Return to Series Edit", "Save", "Series", new { area = "Admin", Id = Model.Season.Series_Id }, new { id = "btnSeasonCancel" })
+            </div>
         </div>
+
+
+        @*<div id="tg-series-episode-list">
+            @Html.Action("SeasonEpisodes", "Season", new { area = "Admin", _seasonId = Model.Season.Id })
+        </div>*@
+
+        @{
+            Html.RenderPartial("~/Areas/Admin/Views/Episode/_episodeCardList.cshtml", _episodes);
+        }
     </div>
 </div>
 

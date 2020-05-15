@@ -27,7 +27,7 @@ export class formBase {
                         let loadForm = new formBinder(base.route, base.searchFormName, base.saveFormName);
                         loadForm.resetAllPanels();
 
-                        document.getElementById('SaveFormArea').innerHTML = this.responseText;
+                        document.getElementById('EditFormArea').innerHTML = this.responseText;
 
                         loadForm.bindResetButton();
                         loadForm.bindSaveButton();
@@ -62,7 +62,7 @@ export class formBase {
                         let loadForm = new formBinder(base.route, base.searchFormName, base.saveFormName);
                         loadForm.resetAllPanels();
 
-                        document.getElementById('SaveFormArea').innerHTML = this.responseText;
+                        document.getElementById('EditFormArea').innerHTML = this.responseText;
 
                         loadForm.bindEditButton();
                         loadForm.bindDeleteButton();
@@ -135,7 +135,7 @@ export class formBase {
                 let xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function loadSaveForm() {
                     if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById('SaveFormArea').innerHTML = this.responseText;
+                        document.getElementById('EditFormArea').innerHTML = this.responseText;
                     }
                 }
 
@@ -165,7 +165,7 @@ export class formBase {
                         let loadForm = new formBinder(base.route, base.searchFormName, base.saveFormName);
                         loadForm.resetAllPanels();
 
-                        document.getElementById('SaveFormArea').innerHTML = this.responseText;
+                        document.getElementById('EditFormArea').innerHTML = this.responseText;
 
                         loadForm.bindResetButton();
                         loadForm.bindSaveButton();
@@ -189,6 +189,6 @@ export class formBase {
     }
 
     static resetFormPanel() {
-        document.getElementById('SaveFormArea').innerHTML = '';
+        document.getElementById('EditFormArea').innerHTML = '';
     }
 }

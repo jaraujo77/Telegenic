@@ -21,17 +21,60 @@ textarea {
 }
 
 
+/*Padding*/
+.tg-padding-top{
+    padding-top: 15px;
+}
+
+.tg-no-pad-top{
+    padding-top: 0px;
+}
+
+.tp-padding-right{
+    padding-right: 15px;
+}
+
+.tg-no-pad-right {
+    padding-right: 0px;
+}
+
+.tg-padding-left {
+    padding-left: 15px;
+}
+
+.tg-no-pad-left {
+    padding-left: 0px;
+}
+
+.tg-padding-bottom{
+    padding-bottom:0px;
+}
+
+.tg-no-pad-bottom{
+    padding-bottom:0px;
+}
+
 /*Flex*/
-.tg-flex-container{
-    display:flex
+.tg-flex-container {
+    display: flex;
 }
 
-.tg-flex-child{
-    flex:1;
+.tg-flex-child {
+    flex: 1;
 }
 
-.tg-flex-child:first-child{
-    margin-right:20px;
+.tg-flex-child:first-child {
+    margin-right: 20px;
     width: 60%;
 }
 
+/*Scrolling*/
+.tg-scrolling-wrapper{
+    display:flex;
+    flex-wrap: nowrap;
+    overflow-x:auto;
+
+    .card{
+        flex: 0 0 auto;
+    }
+}
