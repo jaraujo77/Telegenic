@@ -1,32 +1,29 @@
 ﻿import { formBase } from "./formBase";
 
-export class formBinder extends formBase {
-    constructor(route, searchFormName, saveFormName) {        
-        super(route, searchFormName, saveFormName);
-    }
+export class formBinder extends formBase {    
 
     bindEditButton() {
-        super.addEditEntityHandler();
+        super.setBtnEditClickHandler();
     }
 
     bindDeleteButton() {
-        super.addDeleteEntityHandler();
+        super.setBtnDeleteClickHandler();
     }
 
     bindSaveButton() {
-        super.addSaveEntityHandler();
+        super.setBtnSaveClickHandler();
     }
 
     bindSearchButton() {
-        super.addSearchEntitiesHandler();
+        super.setBtnSearchClickHandler();
     }
 
     bindResetButton() {
-        super.addResetPageHandler();
+        super.setBtnResetClickHandler();
     }
 
     bindAddButton() {
-        super.addAddEntityHander();
+        super.setBtnAddClickHandler();
     }
 
     resetAllPanels() {

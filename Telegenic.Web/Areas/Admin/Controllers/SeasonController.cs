@@ -22,20 +22,20 @@ namespace Telegenic.Web.Areas.Admin.Controllers
         }
 
         // GET: Admin/Season
-        public ActionResult Index(int seriesId)
+        public ActionResult Index(int _seriesId)
         {            
-            var seasons = _seasonRepository.GetSeasonsBySeriesId(seriesId);
+            var seasons = _seasonRepository.GetSeasonsBySeriesId(_seriesId);
             var vm = new vmEntityList<Season>(seasons.Cast<Season>());
-            vm.SearchEntity = _seriesRepository.GetById(seriesId);
+            vm.SearchEntity = _seriesRepository.GetById(_seriesId);
             vm.PageHeading = string.Format("{0} Seasons", vm.SearchEntity.Title);
-            return PartialView("_seasonAdmin", vm);
+            return PartialView("_seasonTableAlternating", vm);
         }
 
         // GET: Admin/Season/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int _seriesId)
         {
             var vm = new vmEntity();
-            vm.Season = id > 0 ? _seasonRepository.GetById(id) : new Season();
+            vm.Season = _seriesId > 0 ? _seasonRepository.GetById(_seriesId) : new Season();
             vm.PageHeading = $"Season: {vm.Season.Title}";
 
             return View(vm);
@@ -63,7 +63,7 @@ namespace Telegenic.Web.Areas.Admin.Controllers
                 try
                 {
                     _seasonRepository.Save(vm.Season);
-                    return RedirectToAction("Index", new { seriesId = vm.Season.Series_Id });
+                    return RedirectToAction("Save", "Series", new { _seriesId = vm.Season.Series_Id });
                 }
                 catch (Exception ex)
                 {
@@ -76,11 +76,11 @@ namespace Telegenic.Web.Areas.Admin.Controllers
         }
 
         // GET: Admin/Season/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int _seriesId)
         {
-            var season = _seasonRepository.GetById(id);
+            var season = _seasonRepository.GetById(_seriesId);
             _seasonRepository.Delete(season);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { _seriesId = _seriesId });
         }
 
         // Get: 

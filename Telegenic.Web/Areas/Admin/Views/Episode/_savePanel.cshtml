@@ -15,6 +15,7 @@
         <div class="panel-body">
             <fieldset>
                 @Html.HiddenFor(m => m.Episode.Id)
+                @Html.HiddenFor(m => m.Episode.Season_Id)
                 <div class="form-group">
                     @Html.LabelFor(model => model.Episode.Title, new { @class = "col-sm-2 col-form-label" })
                     @Html.EditorFor(model => model.Episode.Title, new { htmlAttributes = new { @class = "form-control", @placeholder = "Title" } })

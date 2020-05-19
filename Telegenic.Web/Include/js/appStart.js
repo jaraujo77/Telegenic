@@ -31,10 +31,10 @@ document.onreadystatechange = function documentInitialize(e) {
                 break;
         }
 
-        console.log(_route);
-        console.log(_searchForm);
-        console.log(_saveForm);
-        let _forms = new formBinder(_route, _searchForm, _saveForm);
+        //console.log(_route);
+        //console.log(_searchForm);
+        //console.log(_saveForm);
+        let _forms = new formBinder();
         _forms.bindInit();
         
     }

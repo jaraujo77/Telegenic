@@ -1,13 +1,13 @@
 ﻿@using Telegenic.Entities.Models
-@model IEnumerable<Season>
+@model IEnumerable<Season>    
 
 @{ 
-    var count = 0;
+    var count = 0;    
 }
 
     <div class="panel-body">
         <div class="panel-heading">
-            @Html.ActionLink("Add New Season", "Save", "Season", new { _seasonId = 0, _seriesId = Model.FirstOrDefault<Season>().Series_Id }, new { id = "btnAdd" })
+            @Html.ActionLink("Add New Season", "Save", "Season", new { _seasonId = 0, _seriesId = ViewBag._seriesId }, new { id = "btnAdd" })
         </div>
         <table class="table table-hover">
             <thead>
@@ -35,8 +35,8 @@
                             @Html.DisplayFor(modelItem => season.Season_Number)
                         </th>
                         <td>
-                            @Html.ActionLink("Edit", "Save", "Season", new { _seasonId = season.Id, _seriesId = season.Series_Id }, new { id = "btnEdit" }) |
-                            @Html.ActionLink("Delete", "Delete", "Season", new { _seasonId = season.Id, _seriesId = season.Series_Id }, new { id = "btnDelete" })
+                            @Html.ActionLink("Edit", "Save", "Season", new { _seasonId = season.Id, _seriesId = season.Series_Id }, new { id = "btnEdit", data_action = "edit" }) |
+                            @Html.ActionLink("Delete", "Delete", "Season", new { _seasonId = season.Id, _seriesId = season.Series_Id }, new { id = "btnDelete", data_action = "delete" })
                         </td>
                     </tr>
                 }

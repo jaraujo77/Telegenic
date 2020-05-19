@@ -12,11 +12,13 @@ namespace Telegenic.Web.Areas.Admin.Controllers
     {
         EpisodeRepository _episodeRepository;
         GenreRepository _genreRepository;
+        SeasonRepository _seasonRepository;
 
-        public EpisodeController(IEpisodeRepository episodeRepository, IGenreRepository genreRepository)
+        public EpisodeController(IEpisodeRepository episodeRepository, IGenreRepository genreRepository, ISeasonRepository seasonRepository)
         {
             _episodeRepository = (EpisodeRepository)episodeRepository;
             _genreRepository = (GenreRepository)genreRepository;
+            _seasonRepository = (SeasonRepository)seasonRepository;
         }
 
         // GET: Admin/Episode
@@ -43,11 +45,12 @@ namespace Telegenic.Web.Areas.Admin.Controllers
         }
 
         //TODO change to _episodeId
-        public ActionResult Save(int? id)
+        public ActionResult Save(int _seasonId, int? _episodeId)
         {
             var vm = new vmEntity(_genreRepository.GetAll().OrderBy(x => x.Title));
-            vm.Episode = id != 0 ? _episodeRepository.GetById(id.GetValueOrDefault()) : new Episode();
-            vm.PageHeading = id != null ? string.Format("Edit Episode: {0}", vm.Episode.Title) : string.Format("Add New Episode");
+            vm.Season = _seasonRepository.GetById(_seasonId);
+            vm.Episode = _episodeId != 0 ? _episodeRepository.GetById(_episodeId.GetValueOrDefault()) : GetNewEpisodeForEdit(_episodeId.GetValueOrDefault(), _seasonId);
+            vm.PageHeading = _episodeId != null ? $"Edit Episode {vm.Episode.Title} Season {vm.Season.Season_Number}" : $"Add Episode to Season {vm.Season.Season_Number}";
 
             return PartialView("_savePanel", vm);
         }
@@ -60,10 +63,8 @@ namespace Telegenic.Web.Areas.Admin.Controllers
             {
                 try
                 {
-                    //TODO Fix this to use a season assignment
-                    vm.Episode.Season_Id = 15;
                     _episodeRepository.Save(vm.Episode);
-                    return RedirectToAction("Detail", new { id = vm.Episode.Id });
+                    return RedirectToAction("Detail", new { _episodeId = vm.Episode.Id });
                 }
                 catch (Exception ex)
                 {
@@ -75,22 +76,30 @@ namespace Telegenic.Web.Areas.Admin.Controllers
             return PartialView("_savePanel", vm);
         }
 
-        public ActionResult Detail(int id)
+        public ActionResult Detail(int _episodeId)
         {
             var vm = new vmEntity(_genreRepository.GetAll().OrderBy(x => x.Title));
-            vm.Episode = id > 0 ? _episodeRepository.GetById(id) : new Episode();
+            vm.Episode = _episodeId > 0 ? _episodeRepository.GetById(_episodeId) : new Episode();
             vm.PageHeading = string.Format("Episode: {0}", vm.Episode.Title);
 
             return PartialView("_detailPanel", vm);
         }
 
         [HttpPost]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int _episodeId)
         {
-            var episode = _episodeRepository.GetById(id);
+            var episode = _episodeRepository.GetById(_episodeId);
             _episodeRepository.Delete(episode);
 
             return RedirectToAction("Find");
+        }
+
+        private Episode GetNewEpisodeForEdit(int _episodeId, int _seasonId)
+        {
+            var ep = new Episode();
+            ep.Season_Id = _seasonId;
+            return ep;
+
         }
     }
 }

@@ -1,23 +1,24 @@
-﻿@using Telegenic.Entities.Models
-@model IEnumerable<Episode>
+﻿@using Telegenic.Entities.ViewModels
+@using Telegenic.Entities.Models
+@model vmEntityList<Episode>
 
 
 <div id="tg-series-episode" class="tg-padding-top">
     <div class="tg-flex-container">
         <div class="panel-heading tg-flex-child">
-            <h1 class="panel-title"><strong>Episodes</strong></h1>
+            <h1 class="panel-title"><strong>Episodes</strong></h1>            
         </div>
         <div class="tg-flex-child">
-            @Html.ActionLink("Add New Episode", "Save", "Episode", new { id = 0 }, new { id = "btnAdd" })
+            @Html.ActionLink("Add New Episode", "Save", "Episode", new {_seasonId = Model.SearchEntity.Id, _episodeId = 0 }, new { id = "btnAdd" })
         </div>
     </div>    
     <div id="tg-episode-card-list" class="row tg-scrolling-wrapper panel-body">
         @{
-            foreach (var episode in Model)
+            foreach (var episode in Model.Entities)
             {
                 <div class="card col-md-3 col-xs-6">
                     <h3 class="card-header">@Html.DisplayFor(model => episode.EpisodeNumber)</h3>
-                    <a href="@Url.Action("Save", "Episode", new { id = episode.Id })"
+                    <a href="@Url.Action("Save", "Episode", new { _seasonId = Model.SearchEntity.Id, _episodeId = episode.Id })"
                        class=""
                        data-action="edit"
                        data-val="@episode.Id">

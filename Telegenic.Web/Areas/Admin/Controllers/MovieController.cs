@@ -43,11 +43,11 @@ namespace Telegenic.Web.Areas.Admin.Controllers
         }
 
         // GET: Admin/Series/Create
-        public ActionResult Save(int? id)
+        public ActionResult Save(int? _movieId)
         {
             var vm = new vmEntity(_genreRepository.GetAll().OrderBy(x => x.Title));
-            vm.Movie = id != 0 ? _movieRepository.GetById(id.GetValueOrDefault()) : new Movie();
-            vm.PageHeading = id != null ? string.Format("Edit Movie: {0}", vm.Movie.Title) : string.Format("Add New Movie");
+            vm.Movie = _movieId != 0 ? _movieRepository.GetById(_movieId.GetValueOrDefault()) : new Movie();
+            vm.PageHeading = _movieId != null ? string.Format("Edit Movie: {0}", vm.Movie.Title) : string.Format("Add New Movie");
 
             return PartialView("_savePanel", vm);
         }
@@ -74,18 +74,18 @@ namespace Telegenic.Web.Areas.Admin.Controllers
             return PartialView("_savePanel", vm);
         }
 
-        public ActionResult Detail(int id)
+        public ActionResult Detail(int _movieId)
         {
             var vm = new vmEntity(_genreRepository.GetAll().OrderBy(x => x.Title));
-            vm.Movie = id > 0 ? _movieRepository.GetById(id) : new Movie();
+            vm.Movie = _movieId > 0 ? _movieRepository.GetById(_movieId) : new Movie();
             vm.PageHeading = string.Format("Movie: {0}", vm.Movie.Title);
 
             return PartialView("_detailPanel", vm);
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int _movieId)
         {
-            var movie = _movieRepository.GetById(id);
+            var movie = _movieRepository.GetById(_movieId);
             _movieRepository.Delete(movie);
             return RedirectToAction("Find");
         }

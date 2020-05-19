@@ -3,6 +3,9 @@
 
 @model vmEntity
 
+@{ 
+    var _seasons = Model.Series.Seasons != null ? Model.Series.Seasons.Cast<Season>() : new List<Season>();
+}
 
     <div class="panel panel-primary">
         <div class="panel-heading ">
@@ -32,6 +35,6 @@
             </div>
         </div>
         @{
-            Html.RenderPartial("~/Areas/Admin/Views/Season/_seasonTableAlternating.cshtml", Model.Series.Seasons.Cast<Season>());
+            Html.RenderPartial("~/Areas/Admin/Views/Season/_seasonTableAlternating.cshtml", _seasons, new ViewDataDictionary { { "_seriesId", Model.Series.Id } });
         }
     </div>

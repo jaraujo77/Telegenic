@@ -5,6 +5,7 @@
 
 @{ 
     var count = 0;
+    var _seasons = Model.Series.Seasons != null ? Model.Series.Seasons.Cast<Season>() : new List<Season>();
 }
 
 
@@ -17,39 +18,47 @@
             @using (Html.BeginForm("Save", "Series", FormMethod.Post, new { @name = "save_series" }))
             {
                 @Html.AntiForgeryToken()
-                <fieldset>
-                    @Html.HiddenFor(m => m.Series.Id)
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Series.Title, new { @class = "col-sm-4 col-form-label" })
-                        @Html.EditorFor(model => model.Series.Title, new { htmlAttributes = new { @class = "form-control", @placeholder = "Title" } })
+            <fieldset>
+                @Html.HiddenFor(m => m.Series.Id)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Series.Title, new { @class = "col-sm-4 col-form-label" })
+                    @Html.EditorFor(model => model.Series.Title, new { htmlAttributes = new { @class = "form-control", @placeholder = "Title" } })
 
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Series.Genre.Name, new { @class = "col-sm-4 col-form-label" })
-                        @Html.DropDownListFor(m => m.Series.Genre.Id, Model.SelectListItems(Model.Genres, "Genre"), new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Series.Genre.Name, new { @class = "col-sm-4 col-form-label" })
+                    @Html.DropDownListFor(m => m.Series.Genre.Id, Model.SelectListItems(Model.Genres, "Genre"), new { @class = "form-control" })
 
-                    </div>
-                    <button id="btnSubmit"
-                            type="submit"
-                            class="btn btn-primary"
-                            data-action="save">
-                        <i class="glyphicon glyphicon-ok"></i>
-                        &nbsp;Submit
-                    </button>
-                    <a id="btnReset"
-                       class="btn btn-primary"
-                       href="@Url.Action("Index", "Series", new { area = "Admin" })"
-                       data-action="cancelSave">
-                        <i class="glyphicon glyphicon-remove"></i>
-                        &nbsp;Cancel
-                    </a>
-                </fieldset>
+                </div>
+                <button id="btnSubmit"
+                        type="submit"
+                        class="btn btn-primary"
+                        data-action="save">
+                    <i class="glyphicon glyphicon-ok"></i>
+                    &nbsp;Submit
+                </button>
+                <button id="btnReset"
+                        type="reset"
+                        class="btn btn-primary"
+                        data-action="cancelSave">
+                    <i class="glyphicon glyphicon-remove"></i>
+                    &nbsp;Cancel
+                </button>
+
+                @*<a id="btnReset"
+                   class="btn btn-primary"
+                   href="@Url.Action("Index", "Series", new { area = "Admin" })"
+                   data-action="cancelSave">
+                    <i class="glyphicon glyphicon-remove"></i>
+                    &nbsp;Cancel
+                </a>*@
+            </fieldset>
             }
 
         </div>
         
         @{
-            Html.RenderPartial("~/Areas/Admin/Views/Season/_seasonTableAlternating.cshtml", Model.Series.Seasons.Cast<Season>());
+            Html.RenderPartial("~/Areas/Admin/Views/Season/_seasonTableAlternating.cshtml", _seasons, new ViewDataDictionary { { "_seriesId", Model.Series.Id } });
         }
     </div>
 </div>

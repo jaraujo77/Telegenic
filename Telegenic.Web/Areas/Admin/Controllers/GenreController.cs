@@ -40,11 +40,11 @@ namespace Telegenic.Web.Areas.Admin.Controllers
         }
 
         // GET: Admin/Genre/Save
-        public ActionResult Save(int? id)
+        public ActionResult Save(int? _genreId)
         {
             var vm = new vmEntity();
-            vm.Genre = id != 0 ? _genreRepository.GetById(id.GetValueOrDefault()) : new Genre();
-            vm.PageHeading = id != null ? string.Format("Edit Genre: {0}", vm.Genre.Title) : string.Format("Add New Genre");
+            vm.Genre = _genreId != 0 ? _genreRepository.GetById(_genreId.GetValueOrDefault()) : new Genre();
+            vm.PageHeading = _genreId != null ? string.Format("Edit Genre: {0}", vm.Genre.Title) : string.Format("Add New Genre");
 
             return PartialView("_savePanel", vm);
         }
@@ -71,18 +71,18 @@ namespace Telegenic.Web.Areas.Admin.Controllers
             return PartialView("_savePanel", vm);
         }
 
-        public ActionResult Detail(int id)
+        public ActionResult Detail(int _genreId)
         {
             var vm = new vmEntity();
-            vm.Genre = id > 0 ? _genreRepository.GetById(id) : new Genre();
+            vm.Genre = _genreId > 0 ? _genreRepository.GetById(_genreId) : new Genre();
             vm.PageHeading = string.Format("Genre: {0}", vm.Genre.Title);
 
             return PartialView("_detailPanel", vm);
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int _genreId)
         {
-            var genre = _genreRepository.GetById(id);
+            var genre = _genreRepository.GetById(_genreId);
             _genreRepository.Delete(genre);
             return RedirectToAction("Find");
         }

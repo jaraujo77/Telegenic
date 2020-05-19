@@ -6,6 +6,9 @@
 
 @{ 
     var _episodes = Model.Season.Episodes != null ? Model.Season.Episodes.Cast<Episode>() : new List<Episode>();
+
+    var episodeVM = new vmEntityList<Episode>(_episodes);
+    episodeVM.SearchEntity = Model.Season;
 }
 
 
@@ -36,23 +39,26 @@
 
                         </div>
 
-                        <button type="submit" id="btnSeasonSubmit" class="btn btn-primary" data-action="save">
+                        <button id="btnSubmit"
+                                type="submit"
+                                class="btn btn-primary"
+                                data-action="save">
                             <i class="glyphicon glyphicon-ok"></i>
                             &nbsp;Submit
                         </button>
-                        <a id="btnSeasonCancel"
-                           class="btn btn-primary"
-                           href="@Url.Action("Save", "Series", new { area = "Admin", Id = Model.Season.Series_Id })"
-                           data-action="cancelSave">
+                        <button id="btnReset"
+                                type="reset"
+                                class="btn btn-primary"
+                                data-action="cancelSave">
                             <i class="glyphicon glyphicon-remove"></i>
                             &nbsp;Cancel
-                        </a>
+                        </button>
                         @*@Html.ActionLink("Cancel", "Index", "Season", new { area = "Admin", seriesId = Model.Season.Series_Id }, new { @class = "btn btn-primary", id = "btnSeasonCancel" })*@
                     </fieldset>
                 }
             </div>
             <div class="tg-flex-child col-lg-3">
-                @Html.ActionLink("Return to Series Edit", "Save", "Series", new { area = "Admin", Id = Model.Season.Series_Id }, new { id = "btnSeasonCancel" })
+                @Html.ActionLink("Return to Series Edit", "Save", "Series", new { area = "Admin", _seriesId = Model.Season.Series_Id }, new { id = "btnSeasonCancel", data_action = "edit" })
             </div>
         </div>
 
@@ -62,7 +68,10 @@
         </div>*@
 
         @{
-            Html.RenderPartial("~/Areas/Admin/Views/Episode/_episodeCardList.cshtml", _episodes);
+            if (Model.Season != null && Model.Season.Id > 0)
+            {
+                Html.RenderPartial("~/Areas/Admin/Views/Episode/_episodeCardList.cshtml", episodeVM);
+            }
         }
     </div>
 </div>

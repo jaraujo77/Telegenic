@@ -26,19 +26,6 @@ namespace Telegenic.Web.Areas.Admin.Controllers
             return View("_searchPanel", vm);
         }
 
-        //[HttpPost]
-        //public ActionResult Index(vmSearch vm)
-        //{
-        //    return View();
-        //}
-
-        //public ActionResult Find()
-        //{
-        //    var results = _seriesRepository.GetAll();
-
-        //    return PartialView("_gridResultsPanel", results);
-        //}
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Find(vmSearch vm)
@@ -49,11 +36,11 @@ namespace Telegenic.Web.Areas.Admin.Controllers
         }
 
         // GET: Admin/Series/Save
-        public ActionResult Save(int? id)
+        public ActionResult Save(int? _seriesId)
         {
             var vm = new vmEntity(_genreRepository.GetAll().OrderBy(x => x.Title));
-            vm.Series = id != 0 ? _seriesRepository.GetById(id.GetValueOrDefault()) : new Series();
-            vm.PageHeading = id != null ? string.Format("Edit Series: {0}", vm.Series.Title) : string.Format("Add New Series");
+            vm.Series = _seriesId != 0 ? _seriesRepository.GetById(_seriesId.GetValueOrDefault()) : new Series();
+            vm.PageHeading = _seriesId != null ? string.Format("Edit Series: {0}", vm.Series.Title) : string.Format("Add New Series");
 
             return PartialView("_savePanel", vm);
         }
@@ -68,7 +55,7 @@ namespace Telegenic.Web.Areas.Admin.Controllers
                 try
                 {
                     _seriesRepository.Save(vm.Series);
-                    return RedirectToAction("Detail", new { id = vm.Series.Id });
+                    return RedirectToAction("Detail", new { _seriesId = vm.Series.Id });
                 }
                 catch (Exception ex)
                 {
@@ -80,18 +67,18 @@ namespace Telegenic.Web.Areas.Admin.Controllers
             return PartialView("_savePanel", vm);
         }
 
-        public ActionResult Detail(int id)
+        public ActionResult Detail(int _seriesId)
         {
             var vm = new vmEntity(_genreRepository.GetAll().OrderBy(x => x.Title));
-            vm.Series = id > 0 ? _seriesRepository.GetById(id) : new Series();
+            vm.Series = _seriesId > 0 ? _seriesRepository.GetById(_seriesId) : new Series();
             vm.PageHeading = string.Format("Series: {0}", vm.Series.Title);
 
             return PartialView("_detailPanel", vm);
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int _seriesId)
         {
-            var series = _seriesRepository.GetById(id);
+            var series = _seriesRepository.GetById(_seriesId);
             _seriesRepository.Delete(series);
             return RedirectToAction("Find");
         }
