@@ -1,0 +1,30 @@
+﻿@using Telegenic.Entities.ViewModels
+@model vmSearch
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h1 class="panel-title">@Model.SearchHeading</h1>
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            @Html.LabelFor(m => m.SearchTerm, "Title")
+            @Html.TextBoxFor(m => m.SearchTerm, new { @class = "form-control" })
+        </div>
+        <div class="panel-footer">
+            <button id="btnSearch"
+                    class="btn btn-sm btn-primary"
+                    type="submit"
+                    data-action="search">
+                <i class="glyphicon glyphicon-search"></i>
+                &nbsp;Search
+            </button>
+            <button id="btnReset"
+                    class="btn btn-sm btn-primary"
+                    type="reset"
+                    data-action="reset">
+                <i class="glyphicon glyphicon-search"></i>
+                &nbsp;Search
+            </button>
+        </div>
+    </div>
+</div>

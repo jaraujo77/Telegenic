@@ -1,5 +1,6 @@
 ﻿@using Telegenic.Entities.Models
-@model IEnumerable<Season>    
+@using Telegenic.Entities.ViewModels
+@model vmEntityList<Season>
 
 @{ 
     var count = 0;    
@@ -13,16 +14,16 @@
             <thead>
                 <tr>
                     <th scope="col">
-                        @Html.DisplayNameFor(model => model.FirstOrDefault().Title)
+                        @Html.DisplayNameFor(model => model.Entities.FirstOrDefault().Title)
                     </th>
                     <th scope="col">
-                        @Html.DisplayNameFor(model => model.FirstOrDefault().Season_Number)
+                        @Html.DisplayNameFor(model => model.Entities.FirstOrDefault().Season_Number)
                     </th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var season in Model)
+                @foreach (var season in Model.Entities)
                 {
                     var rowClass = count % 2 == 0 ? "table-primary" : "table-secondary";
                     count++;

@@ -23,7 +23,7 @@ namespace Telegenic.Web.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var vm = new vmSearch("Search Movies");
-            return View(vm);
+            return View("_searchPanel", vm);
         }
 
         public ActionResult Find()
@@ -62,7 +62,7 @@ namespace Telegenic.Web.Areas.Admin.Controllers
                 try
                 {
                     _movieRepository.Save(vm.Movie);
-                    return RedirectToAction("Detail", new { id = vm.Movie.Id });
+                    return RedirectToAction("Detail", new { _movieId = vm.Movie.Id });
                 }
                 catch (Exception ex)
                 {

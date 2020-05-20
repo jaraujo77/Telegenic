@@ -53,7 +53,6 @@
                             <i class="glyphicon glyphicon-remove"></i>
                             &nbsp;Cancel
                         </button>
-                        @*@Html.ActionLink("Cancel", "Index", "Season", new { area = "Admin", seriesId = Model.Season.Series_Id }, new { @class = "btn btn-primary", id = "btnSeasonCancel" })*@
                     </fieldset>
                 }
             </div>
@@ -61,11 +60,6 @@
                 @Html.ActionLink("Return to Series Edit", "Save", "Series", new { area = "Admin", _seriesId = Model.Season.Series_Id }, new { id = "btnSeasonCancel", data_action = "edit" })
             </div>
         </div>
-
-
-        @*<div id="tg-series-episode-list">
-            @Html.Action("SeasonEpisodes", "Season", new { area = "Admin", _seasonId = Model.Season.Id })
-        </div>*@
 
         @{
             if (Model.Season != null && Model.Season.Id > 0)

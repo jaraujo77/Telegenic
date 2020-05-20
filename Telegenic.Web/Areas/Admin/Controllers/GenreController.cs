@@ -20,7 +20,7 @@ namespace Telegenic.Web.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var vm = new vmSearch("Search Genre");
-            return View(vm);
+            return View("_searchPanel", vm);
         }
 
         public ActionResult Find()
@@ -59,7 +59,7 @@ namespace Telegenic.Web.Areas.Admin.Controllers
                 try
                 {
                     _genreRepository.Save(vm.Genre);
-                    return RedirectToAction("Detail", new { id = vm.Genre.Id });
+                    return RedirectToAction("Detail", new { _genreId = vm.Genre.Id });
                 }
                 catch (Exception ex)
                 {

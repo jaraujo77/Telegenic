@@ -26,7 +26,7 @@
 
                 <tr class=@rowClass>
                     <th scope="row">
-                        <a href="@Url.Action("Save")"
+                        <a href="@Url.Action("Save", "Genre", new { _genreId = item.Id })"
                            class="btn btn-default btn-sm"
                            data-action="edit"
                            data-val="@item.Id">
@@ -37,7 +37,7 @@
                         @Html.DisplayFor(modelItem => item.Title)
                     </td>
                     <td>
-                        <a href="@Url.Action("Delete")"
+                        <a href="@Url.Action("Delete", "Genre", new { _genreId = item.Id })"
                            class="btn btn-default btn-sm"
                            data-action="delete"
                            data-val="@item.Id">

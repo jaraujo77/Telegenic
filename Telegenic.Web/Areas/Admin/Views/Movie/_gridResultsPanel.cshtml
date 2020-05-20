@@ -14,7 +14,7 @@
                     @Html.LabelFor(m => m.FirstOrDefault().Title)
                 </th>
                 <th scope="col">
-                    @Html.LabelFor(m => m.FirstOrDefault().Genre.Title)
+                    @Html.LabelFor(m => m.FirstOrDefault().Genre.Name)
                 </th>
                 <th scope="col">
                     @Html.LabelFor(m => m.FirstOrDefault().Rating)
@@ -32,7 +32,7 @@
 
                 <tr class=@rowClass>
                     <th scope="row">
-                        <a href="@Url.Action("Save")"
+                        <a href="@Url.Action("Save", "Movie", new { _movieId = item.Id })"
                            class="btn btn-default btn-sm"
                            data-action="edit"
                            data-val="@item.Id">
@@ -49,7 +49,7 @@
                         @Html.DisplayFor(modelItem => item.Rating)
                     </td>
                     <td>
-                        <a href="@Url.Action("Delete")"
+                        <a href="@Url.Action("Delete", "Movie", new { _movieId = item.Id })"
                            class="btn btn-default btn-sm"
                            data-action="delete"
                            data-val="@item.Id">
