@@ -6,6 +6,6 @@ namespace Telegenic.Repository.Interfaces
     {
         void Save(IEntityBase entity);
 
-        void Delete(IEntityBase entity);
+        bool Delete(IEntityBase entity);
     }
 }

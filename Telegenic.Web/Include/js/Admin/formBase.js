@@ -42,24 +42,32 @@ export class formBase {
             item.addEventListener('click', function resultsDeleteClick(e) {
                 e.preventDefault();
 
-                let id = this.getAttribute('data-val');
-                let route = this.getAttribute('href');
+                let form = this.form;
+                let formData = new FormData(form);
+                console.log(new URLSearchParams(formData));
 
                 let xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function loadSaveForm() {
                     if (this.readyState == 4 && this.status == 200) {
 
+                        
                         let binder = new formBinder();
-                        binder.resetAllPanels();
 
-                        document.getElementById('EditFormArea').innerHTML = this.responseText;
+                        if (this.responseType == "json") {
+                            let jsonObj = JSON.parse(this.responseText);
+
+                            document.getElementById('divValidationSummary').innerHTML = jsonObj[0].ErrorMessage;
+                        } else {
+                            document.getElementById('EditFormArea').innerHTML = this.responseText;
+                        }
+                        
 
                         binder.bindInit();
                     }
                 }
 
-                xhr.open('post', `${route}`, true);
-                xhr.send();
+                xhr.open('post', form.action, true);
+                xhr.send(formData);
             });
         });
     }

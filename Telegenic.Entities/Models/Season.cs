@@ -22,7 +22,8 @@ namespace Telegenic.Entities.Models
 
         public virtual int EpisodeCount()
         {
-            return Episodes.Count();
+            var eps = this.Episodes as ICollection<IEpisode>;
+            return eps.Count();
         }
 
         public virtual int Series_Id { get; set; }

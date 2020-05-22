@@ -33,7 +33,7 @@ namespace Telegenic.Repository
             return query;
         }
 
-        public virtual void Delete(IEntityBase entity)
+        public virtual bool Delete(IEntityBase entity)
         {
             using (var tx = _session.BeginTransaction())
             {
@@ -41,11 +41,13 @@ namespace Telegenic.Repository
                 {
                     _session.Delete(entity);
                     tx.Commit();
+                    return true;
                 }
                 catch (Exception ex)
                 {
-
+                    SetError(ex);
                     tx.Rollback();
+                    return false;
                 }
             }
         }
@@ -61,10 +63,23 @@ namespace Telegenic.Repository
                 }
                 catch (Exception ex)
                 {
-
+                    SetError(ex);
                     tx.Rollback();
                 }
             }
+        }
+
+        public virtual string ErrorMessage { get; set; }
+
+        public bool HasError { get; set; }
+
+        public Exception Exception { get; set; }
+
+        private void SetError(Exception ex)
+        {
+            this.HasError = true;
+            this.ErrorMessage = ex.InnerException.Message;
+            this.Exception = ex;
         }
     }
 }

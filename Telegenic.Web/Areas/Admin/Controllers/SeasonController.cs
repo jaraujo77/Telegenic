@@ -76,11 +76,38 @@ namespace Telegenic.Web.Areas.Admin.Controllers
         }
 
         // GET: Admin/Season/Delete/5
-        public ActionResult Delete(int _seriesId)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(vmDelete<Season> vmDelete)
         {
-            var season = _seasonRepository.GetById(_seriesId);
-            _seasonRepository.Delete(season);
-            return RedirectToAction("Index", new { _seriesId = _seriesId });
+            if (ModelState.IsValid)
+            {
+                //if (!vmDelete.EntityHasRelatedItems)
+                //{
+                //    var _seriesId = vmDelete.Entity.Series_Id;
+                //    if (_seasonRepository.Delete(vmDelete.Entity))
+                //    {
+                //        return RedirectToAction("Index", new { _seriesId = _seriesId });
+                //    }
+
+                //    ModelState.AddModelError("Repository Exception", _seasonRepository.Exception.InnerException.Message);
+                //    //vmDelete.ErrorMessage = _seasonRepository.ErrorMessage;
+                //}
+
+                var _seriesId = vmDelete.Entity.Series_Id;
+                if (_seasonRepository.Delete(vmDelete.Entity))
+                {
+                    return RedirectToAction("Save", "Series", new { _seriesId = _seriesId });
+                }
+
+                ModelState.AddModelError("Repository Exception", _seasonRepository.Exception.InnerException.Message);
+            }
+
+            //return RedirectToAction("Index", new { _seriesId = vmDelete.Entity.Series_Id });
+            //return PartialView("_seasonDelete", vmDelete);
+
+            //return Json(Newtonsoft.Json.JsonConvert.SerializeObject(ModelState));
+            return Json(ModelState.Values.SelectMany(x => x.Errors));
         }
 
         // Get: 

@@ -8,7 +8,10 @@
 
     <div class="panel-body">
         <div class="panel-heading">
-            @Html.ActionLink("Add New Season", "Save", "Season", new { _seasonId = 0, _seriesId = ViewBag._seriesId }, new { id = "btnAdd" })
+            @Html.ActionLink("Add New Season", "Save", "Season", new { _seasonId = 0, _seriesId = Model.SearchEntity.Id }, new { id = "btnAdd" })
+        </div>
+        <div id="divValidationSummary" class="alert">
+            @Html.ValidationSummary()
         </div>
         <table class="table table-hover">
             <thead>
@@ -28,6 +31,7 @@
                     var rowClass = count % 2 == 0 ? "table-primary" : "table-secondary";
                     count++;
 
+
                     <tr class=@rowClass>
                         <th scope="row">
                             @Html.DisplayFor(modelItem => season.Title)
@@ -37,7 +41,10 @@
                         </th>
                         <td>
                             @Html.ActionLink("Edit", "Save", "Season", new { _seasonId = season.Id, _seriesId = season.Series_Id }, new { id = "btnEdit", data_action = "edit" }) |
-                            @Html.ActionLink("Delete", "Delete", "Season", new { _seasonId = season.Id, _seriesId = season.Series_Id }, new { id = "btnDelete", data_action = "delete" })
+                            @{
+                                Html.RenderPartial("~/Areas/Admin/Views/Season/_seasonDelete.cshtml", new vmDelete<Season>(season));
+                            }
+                            @*@Html.ActionLink("Delete", "Delete", "Season", new { _seasonId = season.Id, _seriesId = season.Series_Id }, new { id = "btnDelete", data_action = "delete" })*@
                         </td>
                     </tr>
                 }

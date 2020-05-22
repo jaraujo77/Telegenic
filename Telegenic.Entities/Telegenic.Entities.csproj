@@ -60,6 +60,7 @@
     <Compile Include="Models\Series.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Types\RatingType.cs" />
+    <Compile Include="ViewModels\vmDelete.cs" />
     <Compile Include="ViewModels\vmEntity.cs" />
     <Compile Include="ViewModels\vmEntityList.cs" />
     <Compile Include="ViewModels\vmSearch.cs" />
