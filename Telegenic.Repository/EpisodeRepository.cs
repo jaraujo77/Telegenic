@@ -14,7 +14,13 @@ namespace Telegenic.Repository
         public IEnumerable<IEpisode> GetByTitle(string _title)
         {
             var query = _session.Query<Episode>().Where(x => x.Title.StartsWith(_title));
-            return query.ToList<Episode>();
+            return query.OrderBy(x => x.Title).ToList<Episode>();
+        }
+
+        public IEnumerable<IEpisode> GetEpisodesBySeasonId(int _seasonId)
+        {
+            var query = _session.Query<Season>().Where(x => x.Id == _seasonId);
+            return query.SelectMany(x => x.Episodes);
         }
     }
 }

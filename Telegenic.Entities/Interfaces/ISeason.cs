@@ -4,10 +4,12 @@ namespace Telegenic.Entities.Interfaces
 {
     public interface ISeason : IEntityBase
     {
-        IEnumerable<IVideo> Episodes { get; set; }
+        IEnumerable<IEpisode> Episodes { get; set; }
 
         int Season_Number { get; set; }
 
         int EpisodeCount();
+
+        int Series_Id { get; set; }
     }
 }

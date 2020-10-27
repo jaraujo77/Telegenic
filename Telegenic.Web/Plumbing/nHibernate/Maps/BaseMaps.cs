@@ -41,6 +41,7 @@ namespace Telegenic.Web.Plumbing.nHibernate.Maps
 
                 Map(x => x.Title);
                 Map(x => x.Rating, "rating_id").CustomType<RatingType>();
+                Map(x => x.Season_Id);
             }
         }
 
@@ -53,6 +54,7 @@ namespace Telegenic.Web.Plumbing.nHibernate.Maps
                 Map(x => x.Season_Number);
                 Map(x => x.Title);
                 HasMany<Episode>(x => x.Episodes).KeyColumn("season_id").Inverse().Cascade.All();
+                Map(x => x.Series_Id);
             }
         }
 

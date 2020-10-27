@@ -1,0 +1,63 @@
+﻿@using Telegenic.Entities.ViewModels;
+@using Telegenic.Entities.Models;
+@using Telegenic.Web.Plumbing.MVCHelpers;
+@model vmEntity
+
+<div class="panel panel-primary">
+    <div class="panel-heading ">
+        <h1 class="panel-title">@Model.PageHeading</h1>
+    </div>
+    <div class="panel-body">
+        <div class="panel-info">
+            @Html.LabelFor(model => model.Episode.Title, new { @class = "" })
+        </div>
+        <div>
+            <p>
+                <strong>
+                    @Html.DisplayFor(m => m.Episode.Title, new { @class = "" })
+                </strong>
+            </p>
+        </div>
+        <div class="panel-info">
+            @Html.LabelFor(m => m.Episode.Runtime, new { @class = "" })
+        </div>
+        <div>
+            <p>
+                <strong>
+                    @Html.DisplayFor(m => m.Episode.Runtime, new { @class = "" })
+                </strong>
+            </p>
+        </div>
+        <div class="panel-info">
+            @Html.LabelFor(m => m.Episode.PlaceholderImagePath, new { @class = "" })
+        </div>
+        <div>
+            <p>
+                <strong>
+                    @Html.DisplayFor(m => m.Episode.PlaceholderImagePath, new { @class = "" })
+                </strong>
+            </p>
+        </div>
+        <div class="panel-info">
+            @Html.LabelFor(m => m.Episode.Rating, new { @class = "" })
+        </div>
+        <div>
+            <p>
+                <strong>
+                    @Html.DisplayFor(m => m.Episode.Rating, new { @class = "" })
+                </strong>
+            </p>
+        </div>
+        <div class="panel-info">
+            @Html.LabelFor(m => m.Episode.ElenaFriendly, new { @class = "" })
+        </div>
+        <div>
+            <p>
+                <strong>
+                    @Html.YesNo(m => m.Episode.ElenaFriendly)
+                </strong>
+            </p>
+        </div>
+
+    </div>
+</div>

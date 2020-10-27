@@ -1,0 +1,44 @@
+﻿@using Telegenic.Entities.ViewModels;
+@using Telegenic.Entities.Models;
+
+@model vmEntity
+
+
+@using (Html.BeginForm("Save", "Genre", FormMethod.Post, new { @name = "save_genre" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-primary">
+        <div class="panel-heading ">
+            <h1 class="panel-title">@Model.PageHeading</h1>
+        </div>
+        <div class="panel-body">
+            <fieldset>
+                @Html.HiddenFor(m => m.Genre.Id)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Genre.Title, new { @class = "col-sm-2 col-form-label" })
+                    @Html.EditorFor(model => model.Genre.Title, new { htmlAttributes = new { @class = "form-control", @placeholder = "Title" } })
+
+                </div>
+                <button id="btnSubmit"
+                        type="submit"
+                        class="btn btn-primary"
+                        data-action="save">
+                    <i class="glyphicon glyphicon-ok"></i>
+                    &nbsp;Submit
+                </button>
+                <a id="btnReset"
+                   class="btn btn-primary"
+                   href="@Url.Action("Index", "Genre", new { area = "Admin" })"
+                   data-action="cancelSave">
+                    <i class="glyphicon glyphicon-remove"></i>
+                    &nbsp;Cancel
+                </a>
+            </fieldset>
+        </div>
+    </div>
+
+
+
+}
+
