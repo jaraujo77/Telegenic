@@ -21,7 +21,7 @@
     "del": "^5.1.0",
     "gulp-if": "^3.0.0",
     "gulp-rename": "^2.0.0",
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "vinyl-named": "^1.1.0",
     "webpack-stream": "^5.2.1"
   }
